@@ -11,15 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const RandomFilmController = {
     Find: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        let top250Films = [];
+        let top250Films = { items: [] };
         try {
             let response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
             top250Films = yield response.json();
         }
         catch (error) {
             console.log(error);
+            return res.json(500).json({ message: error });
         }
-        res.status(200).json({ results: top250Films });
+        res.status(200).json({ results: top250Films.items[0] });
     }),
 };
 exports.default = RandomFilmController;

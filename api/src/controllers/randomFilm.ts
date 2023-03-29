@@ -2,7 +2,11 @@ import { Request, Response } from "express";
 
 const RandomFilmController = {
   Find: async (req: Request, res: Response) => {
-    let top250Films: any[] = [];
+    interface Top250Films {
+      items: any[];
+    }
+
+    let top250Films: Top250Films = { items: [] };
 
     try {
       let response: any = await fetch(
@@ -12,9 +16,10 @@ const RandomFilmController = {
       top250Films = await response.json();
     } catch (error) {
       console.log(error);
+      return res.json(500).json({ message: error });
     }
 
-    res.status(200).json({ results: top250Films });
+    res.status(200).json({ results: top250Films.items[0] });
   },
 };
 
