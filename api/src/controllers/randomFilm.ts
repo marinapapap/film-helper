@@ -19,7 +19,9 @@ const RandomFilmController = {
       return res.json(500).json({ message: error });
     }
 
-    res.status(200).json({ results: top250Films.items[0] });
+    const random: number = Math.floor(Math.random() * top250Films.items.length);
+
+    res.status(200).json({ results: top250Films.items[random] });
   },
 };
 
