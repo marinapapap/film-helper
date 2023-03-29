@@ -9,9 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/setup", (req: Request, res: Response) => {
-  res
-    .status(200)
-    .json({ message: "Hello there, this is Express + TypeScript" });
+  res.status(200).json({ message: "Hello, this is Express + TypeScript" });
 });
 
 export { app };

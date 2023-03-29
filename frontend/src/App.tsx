@@ -16,7 +16,6 @@ function App() {
         return response.json() as Promise<SetupData>;
       })
       .then(async (data) => {
-        console.log(data.message);
         setPhrase(data.message);
       });
   }, []);
@@ -25,7 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Phrase: {phrase} </p>
+        <p>{phrase}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
