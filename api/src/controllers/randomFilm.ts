@@ -21,8 +21,8 @@ const RandomFilmController = {
 
     const random: number = Math.floor(Math.random() * top250Films.items.length);
 
-    return res.status(200).json({ results: top250Films.items[random] });
+    return res.status(200).json({ result: top250Films.items[random] });
   },
 };
 
-export { RandomFilmController };
+export default RandomFilmController;

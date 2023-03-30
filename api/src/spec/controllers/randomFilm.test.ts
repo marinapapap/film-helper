@@ -1,7 +1,8 @@
 import request from "supertest";
 import { app } from "../../server";
-
 import fetch from "jest-fetch-mock";
+
+require("jest-fetch-mock").enableMocks();
 
 describe("/findFilm", () => {
   test("Find method returns status code 200", async () => {

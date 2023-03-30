@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = require("../../server");
 const jest_fetch_mock_1 = __importDefault(require("jest-fetch-mock"));
+require("jest-fetch-mock").enableMocks();
 describe("/findFilm", () => {
     test("Find method returns status code 200", () => __awaiter(void 0, void 0, void 0, function* () {
         jest_fetch_mock_1.default.mockResponseOnce(JSON.stringify({

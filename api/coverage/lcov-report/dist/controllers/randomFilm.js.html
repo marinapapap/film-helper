@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">70.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/24</span>
+                <span class='fraction'>17/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.81% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/11</span>
+                <span class='fraction'>10/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.15% </span>
+                <span class="strong">84.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/19</span>
+                <span class='fraction'>16/19</span>
             </div>
         
             
@@ -92,11 +92,11 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -106,14 +106,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -121,9 +121,9 @@
 var __awaiter = (this &amp;&amp; this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : <span class="branch-1 cbranch-no" title="branch not covered" >new P(<span class="fstat-no" title="function not covered" >fu</span>nction (resolve) { <span class="cstat-no" title="statement not covered" >resolve(value); </span>});</span> }
     return new (P || (P = Promise))(function (resolve, reject) {
-        function <span class="fstat-no" title="function not covered" >fulfilled(</span>value) { <span class="cstat-no" title="statement not covered" >try { <span class="cstat-no" title="statement not covered" >step(generator.next(value)); </span>} catch (e) { <span class="cstat-no" title="statement not covered" >reject(e); </span>} </span>}
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { <span class="cstat-no" title="statement not covered" >reject(e); </span>} }
         function <span class="fstat-no" title="function not covered" >rejected(</span>value) { <span class="cstat-no" title="statement not covered" >try { <span class="cstat-no" title="statement not covered" >step(generator["throw"](value)); </span>} catch (e) { <span class="cstat-no" title="statement not covered" >reject(e); </span>} </span>}
-        function step(result) { result.done ? <span class="branch-0 cbranch-no" title="branch not covered" >resolve(result.value) </span>: adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -133,14 +133,14 @@ const RandomFilmController = {
         let top250Films = { items: [] };
         try {
             let response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
-<span class="cstat-no" title="statement not covered" >            top250Films = yield response.json();</span>
+            top250Films = yield response.json();
         }
         catch (error) {
 <span class="cstat-no" title="statement not covered" >            console.log(error);</span>
 <span class="cstat-no" title="statement not covered" >            return res.json(500).json({ message: error });</span>
         }
-        const random = <span class="cstat-no" title="statement not covered" >Math.floor(Math.random() * top250Films.items.length);</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ results: top250Films.items[random] });</span>
+        const random = Math.floor(Math.random() * top250Films.items.length);
+        return res.status(200).json({ result: top250Films.items[random] });
     }),
 };
 exports.default = RandomFilmController;
@@ -151,7 +151,7 @@ exports.default = RandomFilmController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-30T11:35:53.956Z
+                at 2023-03-30T14:55:40.314Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
