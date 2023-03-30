@@ -16,7 +16,7 @@ const RandomFilmController = {
       top250Films = await response.json();
     } catch (error) {
       console.log(error);
-      return res.json(500).json({ message: error });
+      return res.status(500).json({ message: error });
     }
 
     const random: number = Math.floor(Math.random() * top250Films.items.length);

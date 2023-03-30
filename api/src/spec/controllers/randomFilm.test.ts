@@ -4,8 +4,12 @@ import fetch from "jest-fetch-mock";
 
 require("jest-fetch-mock").enableMocks();
 
-describe("/findFilm", () => {
-  test("Find method returns status code 200", async () => {
+describe("RandomFilmController", () => {
+  beforeEach(() => {
+    fetch.resetMocks();
+  });
+
+  test("''Find' method returns status code 200", async () => {
     fetch.mockResponseOnce(
       JSON.stringify({
         items: [{ film: "hey film" }],
@@ -14,5 +18,10 @@ describe("/findFilm", () => {
 
     let response = await request(app).get("/randomFilm");
     expect(response.status).toEqual(200);
+  });
+
+  test("'Find' method returns status code 500", async () => {
+    let response = await request(app).get("/randomFilm");
+    expect(response.status).toEqual(500);
   });
 });
