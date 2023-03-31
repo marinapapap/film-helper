@@ -12,7 +12,7 @@ app.use(express.json());
 // test endpoint
 
 app.get("/setup", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Hello, this is Express + TypeScript" });
+  res.status(200).json({ message: "Hello, this should appear in the header" });
 });
 
 // routes
