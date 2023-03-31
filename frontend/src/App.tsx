@@ -1,41 +1,19 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import RandomFilm from "./components/RandomFilm/RandomFilm";
 
-interface SetupData {
-  message: string;
-}
+// import logo from "./logo.svg";
+// import "./App.css";
 
-function App() {
-  const [phrase, setPhrase] = useState<string>("");
+// interface SetupData {
+//   message: string;
+// }
 
-  useEffect(() => {
-    fetch("/setup")
-      .then((response) => {
-        console.log(response);
-        return response.json() as Promise<SetupData>;
-      })
-      .then(async (data) => {
-        setPhrase(data.message);
-      });
-  }, []);
-
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{phrase}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<RandomFilm navigate={useNavigate()} />} />
+    </Routes>
   );
-}
+};
 
 export default App;
