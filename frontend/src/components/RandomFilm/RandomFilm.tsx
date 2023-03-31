@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../logo.svg";
 import "../../App.css";
 
 interface SetupData {
@@ -8,6 +7,7 @@ interface SetupData {
 
 const RandomFilm = ({ navigate }: { navigate: Function }) => {
   const [phrase, setPhrase] = useState<string>("");
+  const [randomFilm, setRandomFilm] = useState<any>("");
 
   useEffect(() => {
     fetch("/setup")
@@ -20,20 +20,16 @@ const RandomFilm = ({ navigate }: { navigate: Function }) => {
       });
   }, []);
 
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setRandomFilm(<div>You pushed me!</div>);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{phrase}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>{phrase}</header>
+      <div>{randomFilm}</div>
+      <button onClick={handleSubmit}>Film Roulette</button>
     </div>
   );
 };
