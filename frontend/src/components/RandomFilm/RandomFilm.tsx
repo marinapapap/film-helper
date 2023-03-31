@@ -1,34 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../App.css";
 
-interface SetupData {
-  message: string;
+interface Film {
+  result: {
+    id: string;
+    rank: string;
+    title: string;
+    fullTitle: string;
+    year: string;
+    image: string;
+    crew: string;
+    imDbRating: string;
+    imDbRatingCount: string;
+  };
 }
 
-const RandomFilm = ({ navigate }: { navigate: Function }) => {
-  const [phrase, setPhrase] = useState<string>("");
-  const [randomFilm, setRandomFilm] = useState<any>("");
+interface RandomFilmProps {
+  navigate: Function;
+}
 
-  useEffect(() => {
-    fetch("/setup")
-      .then((response) => {
-        console.log(response);
-        return response.json() as Promise<SetupData>;
-      })
-      .then(async (data) => {
-        setPhrase(data.message);
-      });
-  }, []);
+const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
+  const [randomFilm, setRandomFilm] = useState<Film>({
+    result: {
+      id: "",
+      rank: "",
+      title: "",
+      fullTitle: "",
+      year: "",
+      image: "",
+      crew: "",
+      imDbRating: "",
+      imDbRatingCount: "",
+    },
+  });
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setRandomFilm(<div>You pushed me!</div>);
+
+    fetch("/randomFilm")
+      .then((response) => {
+        return response.json() as Promise<Film>;
+      })
+      .then(async (data) => {
+        setRandomFilm(data);
+      });
   };
 
   return (
     <div className="App">
-      <header>{phrase}</header>
-      <div>{randomFilm}</div>
+      <div>{randomFilm.result.title}</div>
+      <img src={randomFilm.result.image} alt="" width="500" height="600"></img>
+      <div></div>
       <button onClick={handleSubmit}>Film Roulette</button>
     </div>
   );
