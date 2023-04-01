@@ -7,5 +7,11 @@ describe("RandomFilm", () => {
     cy.mount(<RandomFilm navigate={navigate} />);
   });
 
-  it("runs", () => {});
+  it("renders button", () => {
+    cy.get('[data-cy="button"]').should("be.visible");
+  });
+
+  // it("renders results", () => {
+  //   cy.get('[data-cy="fulltitle"]').should("exist");
+  // });
 });

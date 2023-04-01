@@ -51,10 +51,10 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const showRandomFilm = (): JSX.Element => {
     return (
       <>
-        <p>{randomFilm.result.fullTitle}</p>
-        <img src={randomFilm.result.image} alt=""></img>
-        <p>{randomFilm.result.crew}</p>
-        <p>{randomFilm.result.imDbRating}/10</p>
+        <p data-cy="fulltitle">{randomFilm.result.fullTitle}</p>
+        <img src={randomFilm.result.image} alt="" data-cy="image"></img>
+        <p data-cy="crew">{randomFilm.result.crew}</p>
+        <p data-cy="rating">{randomFilm.result.imDbRating}/10</p>
         <div></div>
       </>
     );
@@ -63,7 +63,9 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   return (
     <div className="App">
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
-      <button onClick={handleSubmit}>Film Roulette</button>
+      <button type="submit" onClick={handleSubmit} data-cy="button">
+        Film Roulette
+      </button>
     </div>
   );
 };
