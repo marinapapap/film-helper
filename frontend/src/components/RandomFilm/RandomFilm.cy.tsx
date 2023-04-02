@@ -10,8 +10,4 @@ describe("RandomFilm", () => {
   it("renders button", () => {
     cy.get('[data-cy="button"]').should("be.visible");
   });
-
-  // it("renders results", () => {
-  //   cy.get('[data-cy="fulltitle"]').should("exist");
-  // });
 });

@@ -13,9 +13,5 @@ const app = (0, express_1.default)();
 exports.app = app;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-// test endpoint
-app.get("/setup", (req, res) => {
-    res.status(200).json({ message: "Hello, this should appear in the header" });
-});
 // routes
 app.use("/randomFilm", randomFilm_1.default);

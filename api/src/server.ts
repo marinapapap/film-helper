@@ -9,12 +9,6 @@ const app: Express = express();
 app.use(cors());
 app.use(express.json());
 
-// test endpoint
-
-app.get("/setup", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Hello, this should appear in the header" });
-});
-
 // routes
 
 app.use("/randomFilm", randomFilmRouter);

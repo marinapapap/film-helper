@@ -45,6 +45,9 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       .then(async (data) => {
         setRandomFilm(data);
         setRenderFilm(true);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
 
@@ -52,7 +55,13 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     return (
       <>
         <p data-cy="fulltitle">{randomFilm.result.fullTitle}</p>
-        <img src={randomFilm.result.image} alt="" data-cy="image"></img>
+        <img
+          src={randomFilm.result.image}
+          alt=""
+          data-cy="image"
+          width="300"
+          height="400"
+        ></img>
         <p data-cy="crew">{randomFilm.result.crew}</p>
         <p data-cy="rating">{randomFilm.result.imDbRating}/10</p>
         <div></div>
