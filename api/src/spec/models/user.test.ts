@@ -22,4 +22,13 @@ describe("User model", () => {
     });
     expect(user.password).toEqual("password");
   });
+
+  it("can list all the users", async () => {
+    try {
+      const users = await User.find();
+      expect(users).toEqual([]);
+    } catch (err) {
+      fail(err);
+    }
+  });
 });

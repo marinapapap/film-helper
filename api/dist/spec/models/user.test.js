@@ -32,4 +32,13 @@ describe("User model", () => {
         });
         expect(user.password).toEqual("password");
     });
+    it("can list all the users", () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const users = yield user_1.default.find();
+            expect(users).toEqual([]);
+        }
+        catch (err) {
+            fail(err);
+        }
+    }));
 });
