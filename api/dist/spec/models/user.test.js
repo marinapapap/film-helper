@@ -18,20 +18,20 @@ describe("User model", () => {
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
         yield user_1.default.deleteMany({});
     }));
-    it("has an email address", () => {
+    it("has an email address", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
             email: "test@email.com",
             password: "password",
         });
         expect(user.email).toEqual("test@email.com");
-    });
-    it("has a password", () => {
+    }));
+    it("has a password", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
             email: "test@email.com",
             password: "password",
         });
         expect(user.password).toEqual("password");
-    });
+    }));
     it("can list all the users", () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const users = yield user_1.default.find();
@@ -56,5 +56,22 @@ describe("User model", () => {
         catch (error) {
             throw error;
         }
+    }));
+    it("cannot have the same email as someone else", () => __awaiter(void 0, void 0, void 0, function* () {
+        const user1 = new user_1.default({
+            email: "test@email.com",
+            password: "password1",
+        });
+        yield user1.save();
+        const user2 = new user_1.default({
+            email: "test@email.com",
+            password: "password2",
+        });
+        try {
+            yield user2.save();
+        }
+        catch (error) { }
+        const users = yield user_1.default.find();
+        expect(users.length).toEqual(1);
     }));
 });
