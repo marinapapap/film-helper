@@ -27,6 +27,15 @@ describe("Random Film", () => {
     cy.get('[data-cy="rating"]').should("be.visible");
   });
 
+  it("does not render random film info before the button is clicked", () => {
+    cy.visit("/");
+
+    cy.get('[data-cy="fulltitle"]').should("not.exist");
+    cy.get('[data-cy="image"]').should("not.exist");
+    cy.get('[data-cy="crew"]').should("not.exist");
+    cy.get('[data-cy="rating"]').should("not.exist");
+  });
+
   it("when button is clicked, elements are rendered and populated with correct information", () => {
     cy.intercept("GET", "/randomFilm", (req) => {
       req.reply({
