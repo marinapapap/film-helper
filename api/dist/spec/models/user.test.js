@@ -57,7 +57,7 @@ describe("User model", () => {
             throw error;
         }
     }));
-    it("cannot have the same email as someone else", () => __awaiter(void 0, void 0, void 0, function* () {
+    it("user cannot have the same email as someone else", () => __awaiter(void 0, void 0, void 0, function* () {
         const user1 = new user_1.default({
             email: "test@email.com",
             password: "password1",
@@ -65,6 +65,23 @@ describe("User model", () => {
         yield user1.save();
         const user2 = new user_1.default({
             email: "test@email.com",
+            password: "password2",
+        });
+        try {
+            yield user2.save();
+        }
+        catch (error) { }
+        const users = yield user_1.default.find();
+        expect(users.length).toEqual(1);
+    }));
+    it("invalid email provided", () => __awaiter(void 0, void 0, void 0, function* () {
+        const user1 = new user_1.default({
+            email: "test@email.com",
+            password: "password1",
+        });
+        yield user1.save();
+        const user2 = new user_1.default({
+            email: "testemail2.com",
             password: "password2",
         });
         try {

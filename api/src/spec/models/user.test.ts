@@ -49,7 +49,7 @@ describe("User model", () => {
     }
   });
 
-  it("cannot have the same email as someone else", async () => {
+  it("user cannot have the same email as someone else", async () => {
     const user1 = new User({
       email: "test@email.com",
       password: "password1",
@@ -58,6 +58,25 @@ describe("User model", () => {
 
     const user2 = new User({
       email: "test@email.com",
+      password: "password2",
+    });
+    try {
+      await user2.save();
+    } catch (error) {}
+
+    const users = await User.find();
+    expect(users.length).toEqual(1);
+  });
+
+  it("invalid email provided", async () => {
+    const user1 = new User({
+      email: "test@email.com",
+      password: "password1",
+    });
+    await user1.save();
+
+    const user2 = new User({
+      email: "testemail2.com",
       password: "password2",
     });
     try {
