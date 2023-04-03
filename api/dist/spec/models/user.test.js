@@ -37,8 +37,24 @@ describe("User model", () => {
             const users = yield user_1.default.find();
             expect(users).toEqual([]);
         }
-        catch (err) {
-            fail(err);
+        catch (error) {
+            throw error;
+        }
+    }));
+    it("can save a user", () => __awaiter(void 0, void 0, void 0, function* () {
+        const user = new user_1.default({
+            email: "test@email.com",
+            password: "password",
+        });
+        try {
+            yield user.save();
+            const users = yield user_1.default.find();
+            expect(users.length).toBeGreaterThan(0);
+            expect(users[0].email).toBe(user.email);
+            expect(users[0].password).toBe(user.password);
+        }
+        catch (error) {
+            throw error;
         }
     }));
 });

@@ -27,8 +27,25 @@ describe("User model", () => {
     try {
       const users = await User.find();
       expect(users).toEqual([]);
-    } catch (err) {
-      fail(err);
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  it("can save a user", async () => {
+    const user = new User({
+      email: "test@email.com",
+      password: "password",
+    });
+    try {
+      await user.save();
+      const users: any = await User.find();
+
+      expect(users.length).toBeGreaterThan(0);
+      expect(users[0].email).toBe(user.email);
+      expect(users[0].password).toBe(user.password);
+    } catch (error) {
+      throw error;
     }
   });
 });
