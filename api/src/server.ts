@@ -11,20 +11,20 @@ app.use(express.json());
 
 // mongoDB test
 
-import User, { IUser } from "./models/user";
+// import User, { IUser } from "./models/user";
 
-app.post("/user", async (req, res) => {
-  const newUser: IUser = await User.create({
-    email: req.body.email,
-    password: req.body.password,
-  });
-  res.status(200).json({ message: "OK", data: newUser });
-});
+// app.post("/user", async (req, res) => {
+//   const newUser: IUser = await User.create({
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
+//   res.status(200).json({ message: "OK", data: newUser });
+// });
 
-app.get("/user", async (req, res) => {
-  const users: IUser[] = await User.find({});
-  res.status(200).json({ users: users });
-});
+// app.get("/user", async (req, res) => {
+//   const users: IUser[] = await User.find({});
+//   res.status(200).json({ users: users });
+// });
 
 // routes
 
