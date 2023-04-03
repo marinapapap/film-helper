@@ -1,9 +1,21 @@
 describe("Random Film", () => {
-  it("makes succesful request", () => {
+  it("request to the host returns the correct html response body", () => {
+    cy.request("/").then((response) => {
+      expect(response.status).to.equal(200);
+      expect(response.body).to.include("<title>React App</title>");
+    });
+  });
+
+  it("request to the '/randomFilm' endpoint returns the correct response body", () => {
     cy.request("/randomFilm").then((response) => {
       expect(response.status).to.equal(200);
       expect(response.body).to.have.property("result");
     });
+  });
+
+  it("homepage is rendered corrently", () => {
+    cy.visit("/");
+    cy.get('[data-cy="button"]').should("be.visible");
   });
 
   it("renders random film info when button is clicked", () => {
