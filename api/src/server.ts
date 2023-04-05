@@ -1,7 +1,8 @@
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Express } from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
+import { TokensController } from "./controllers/tokens";
 
 config({ path: "./config.env" });
 
@@ -17,6 +18,6 @@ import tokensRouter from "./routes/tokens";
 
 // routes
 
-app.use("/randomFilm", randomFilmRouter);
+app.use("/randomFilm", TokensController.Check, randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);

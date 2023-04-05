@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { generateToken } from "../models/tokenGenerator";
+import JWT from "jsonwebtoken";
 import User, { IUser } from "../models/user";
 
 export const TokensController = {
@@ -21,5 +22,27 @@ export const TokensController = {
     } else {
       return res.status(401).json({ message: "auth error" });
     }
+  },
+
+  Check: async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).send("Access denied...No token provided...");
+    }
+
+    JWT.verify(
+      token,
+      process.env.JWT_SECRET as string,
+      (error: any, payload: any) => {
+        if (error) {
+          console.log(error);
+          res.status(401).json({ message: "auth error" });
+        } else {
+          req.body.user_id = payload.user_id;
+          next();
+        }
+      }
+    );
   },
 };

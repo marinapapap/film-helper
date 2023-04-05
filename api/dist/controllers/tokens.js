@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokensController = void 0;
 const tokenGenerator_1 = require("../models/tokenGenerator");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/user"));
 exports.TokensController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,5 +34,21 @@ exports.TokensController = {
         else {
             return res.status(401).json({ message: "auth error" });
         }
+    }),
+    Check: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).send("Access denied...No token provided...");
+        }
+        jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, (error, payload) => {
+            if (error) {
+                console.log(error);
+                res.status(401).json({ message: "auth error" });
+            }
+            else {
+                req.body.user_id = payload.user_id;
+                next();
+            }
+        });
     }),
 };
