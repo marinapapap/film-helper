@@ -17,6 +17,7 @@ const user_1 = __importDefault(require("../models/user"));
 exports.UsersController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password,
         });

@@ -20,6 +20,7 @@ describe("User model", () => {
     }));
     it("has an email address", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password",
         });
@@ -27,10 +28,19 @@ describe("User model", () => {
     }));
     it("has a password", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password",
         });
         expect(user.password).toEqual("password");
+    }));
+    it("has a username", () => __awaiter(void 0, void 0, void 0, function* () {
+        const user = new user_1.default({
+            username: "film-expert",
+            email: "test@email.com",
+            password: "password",
+        });
+        expect(user.username).toEqual("film-expert");
     }));
     it("can list all the users", () => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -43,6 +53,7 @@ describe("User model", () => {
     }));
     it("can save a user", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password",
         });
@@ -50,6 +61,7 @@ describe("User model", () => {
             yield user.save();
             const users = yield user_1.default.find();
             expect(users.length).toBeGreaterThan(0);
+            expect(users[0].username).toBe(user.username);
             expect(users[0].email).toBe(user.email);
             expect(users[0].password).toBe(user.password);
         }
@@ -59,11 +71,13 @@ describe("User model", () => {
     }));
     it("user cannot have the same email as someone else", () => __awaiter(void 0, void 0, void 0, function* () {
         const user1 = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password1",
         });
         yield user1.save();
         const user2 = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password2",
         });
@@ -76,11 +90,13 @@ describe("User model", () => {
     }));
     it("invalid email provided", () => __awaiter(void 0, void 0, void 0, function* () {
         const user1 = new user_1.default({
+            username: "film-expert",
             email: "test@email.com",
             password: "password1",
         });
         yield user1.save();
         const user2 = new user_1.default({
+            username: "film-expert",
             email: "testemail2.com",
             password: "password2",
         });

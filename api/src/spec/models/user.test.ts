@@ -9,6 +9,7 @@ describe("User model", () => {
 
   it("has an email address", async () => {
     const user = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password",
     });
@@ -17,10 +18,20 @@ describe("User model", () => {
 
   it("has a password", async () => {
     const user = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password",
     });
     expect(user.password).toEqual("password");
+  });
+
+  it("has a username", async () => {
+    const user = new User({
+      username: "film-expert",
+      email: "test@email.com",
+      password: "password",
+    });
+    expect(user.username).toEqual("film-expert");
   });
 
   it("can list all the users", async () => {
@@ -34,6 +45,7 @@ describe("User model", () => {
 
   it("can save a user", async () => {
     const user = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password",
     });
@@ -42,6 +54,7 @@ describe("User model", () => {
       const users: any = await User.find();
 
       expect(users.length).toBeGreaterThan(0);
+      expect(users[0].username).toBe(user.username);
       expect(users[0].email).toBe(user.email);
       expect(users[0].password).toBe(user.password);
     } catch (error) {
@@ -51,12 +64,14 @@ describe("User model", () => {
 
   it("user cannot have the same email as someone else", async () => {
     const user1 = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password1",
     });
     await user1.save();
 
     const user2 = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password2",
     });
@@ -70,12 +85,14 @@ describe("User model", () => {
 
   it("invalid email provided", async () => {
     const user1 = new User({
+      username: "film-expert",
       email: "test@email.com",
       password: "password1",
     });
     await user1.save();
 
     const user2 = new User({
+      username: "film-expert",
       email: "testemail2.com",
       password: "password2",
     });

@@ -4,6 +4,7 @@ import User, { IUser } from "../models/user";
 export const UsersController = {
   Create: async (req: Request, res: Response) => {
     const user = new User({
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
     });
