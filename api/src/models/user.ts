@@ -1,17 +1,8 @@
 import mongoose, { Schema, Model } from "mongoose";
 
 export interface IUser {
-  email: {
-    type: StringConstructor;
-    required: Boolean;
-    unique: Boolean;
-    dropDups: Boolean;
-    match: RegExp;
-  };
-  password: {
-    type: StringConstructor;
-    required: Boolean;
-  };
+  email: string;
+  password: string;
 }
 
 const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({
@@ -21,8 +12,8 @@ const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({
     unique: true,
     dropDups: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
-  },
-  password: { type: String, required: true },
+  } as any,
+  password: { type: String, required: true } as any,
 });
 
 const User: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
