@@ -18,6 +18,9 @@ describe("User model", () => {
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
         yield user_1.default.deleteMany({});
     }));
+    afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield user_1.default.deleteMany({});
+    }));
     it("has an email address", () => __awaiter(void 0, void 0, void 0, function* () {
         const user = new user_1.default({
             username: "film-expert",

@@ -7,6 +7,10 @@ describe("User model", () => {
     await User.deleteMany({});
   });
 
+  afterAll(async () => {
+    await User.deleteMany({});
+  });
+
   it("has an email address", async () => {
     const user = new User({
       username: "film-expert",

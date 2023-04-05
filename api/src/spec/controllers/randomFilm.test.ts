@@ -9,7 +9,7 @@ describe("RandomFilmController", () => {
     fetch.resetMocks();
   });
 
-  test("''Find' method returns status code 200", async () => {
+  test("'Find' method returns status code 200", async () => {
     fetch.mockResponseOnce(
       JSON.stringify({
         items: [{ film: "hey film" }],
