@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const RandomFilmController = {
+export const RandomFilmController = {
   Find: async (req: Request, res: Response) => {
     interface Top250Films {
       items: any[];
@@ -15,7 +15,6 @@ const RandomFilmController = {
 
       top250Films = await response.json();
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ message: error });
     }
 
@@ -24,5 +23,3 @@ const RandomFilmController = {
     return res.status(200).json({ result: top250Films.items[random] });
   },
 };
-
-export default RandomFilmController;

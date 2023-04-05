@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const RandomFilmController = {
+exports.RandomFilmController = void 0;
+exports.RandomFilmController = {
     Find: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         let top250Films = { items: [] };
         try {
@@ -17,11 +18,9 @@ const RandomFilmController = {
             top250Films = yield response.json();
         }
         catch (error) {
-            console.log(error);
             return res.status(500).json({ message: error });
         }
         const random = Math.floor(Math.random() * top250Films.items.length);
         return res.status(200).json({ result: top250Films.items[random] });
     }),
 };
-exports.default = RandomFilmController;

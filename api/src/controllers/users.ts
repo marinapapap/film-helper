@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import User, { IUser } from "../models/user";
 
-const UsersController = {
-  Create: async (req: Request, res: Response): Promise<void> => {
+export const UsersController = {
+  Create: async (req: Request, res: Response) => {
     const user = new User({
       email: req.body.email,
       password: req.body.password,
@@ -10,11 +10,9 @@ const UsersController = {
 
     try {
       await user.save();
-      res.status(201).json({ message: "OK" });
-    } catch (err) {
-      res.status(400).json({ message: "Bad request" });
+      return res.status(201).json({ message: "OK" });
+    } catch (error) {
+      return res.status(400).json({ message: error });
     }
   },
 };
-
-export default UsersController;
