@@ -1,28 +1,22 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import session from "express-session";
 import cors from "cors";
 import { config } from "dotenv";
+import cookieParser from "cookie-parser";
 
 config({ path: "./config.env" });
 
 export const app: Express = express();
-app.use(cors());
+
+app.use(cors({ credentials: true, origin: process.env.FRONT_END_URL }));
+app.use(cookieParser());
 app.use(express.json());
-app.use(
-  session({
-    secret: "keyboardcat",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  })
-);
 
 import randomFilmRouter from "./routes/randomFilm";
 import userRouter from "./routes/users";
+import tokensRouter from "./routes/tokens";
 
 // routes
 
 app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
-
-// export { app };
+app.use("/tokens", tokensRouter);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680717355088" clover="3.2.0">
-  <project timestamp="1680717355088" name="All files">
-    <metrics statements="138" coveredstatements="138" conditionals="50" coveredconditionals="45" methods="32" coveredmethods="30" elements="220" coveredelements="213" complexity="0" loc="138" ncloc="138" packages="10" files="14" classes="14"/>
+<coverage generated="1680721116450" clover="3.2.0">
+  <project timestamp="1680721116450" name="All files">
+    <metrics statements="205" coveredstatements="173" conditionals="82" coveredconditionals="60" methods="47" coveredmethods="32" elements="334" coveredelements="265" complexity="0" loc="205" ncloc="205" packages="10" files="20" classes="20"/>
     <package name="dist">
-      <metrics statements="17" coveredstatements="17" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
+      <metrics statements="19" coveredstatements="19" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
       <file name="server.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/server.js">
-        <metrics statements="17" coveredstatements="17" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
+        <metrics statements="19" coveredstatements="19" conditionals="7" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="2" count="2" type="cond" truecount="3" falsecount="0"/>
-        <line num="3" count="10" type="cond" truecount="4" falsecount="0"/>
+        <line num="3" count="12" type="cond" truecount="4" falsecount="0"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -19,14 +19,16 @@
         <line num="13" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
       </file>
     </package>
     <package name="dist.controllers">
-      <metrics statements="37" coveredstatements="37" conditionals="29" coveredconditionals="26" methods="19" coveredmethods="17"/>
+      <metrics statements="61" coveredstatements="45" conditionals="51" coveredconditionals="35" methods="29" coveredmethods="18"/>
       <file name="randomFilm.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/controllers/randomFilm.js">
         <metrics statements="18" coveredstatements="18" conditionals="11" coveredconditionals="10" methods="9" coveredmethods="8"/>
         <line num="2" count="2" type="cond" truecount="3" falsecount="0"/>
@@ -47,6 +49,33 @@
         <line num="21" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
+      </file>
+      <file name="tokens.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/controllers/tokens.js">
+        <metrics statements="24" coveredstatements="8" conditionals="22" coveredconditionals="9" methods="10" coveredmethods="1"/>
+        <line num="2" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="4" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="12" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
       </file>
       <file name="users.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/controllers/users.js">
         <metrics statements="19" coveredstatements="19" conditionals="18" coveredconditionals="16" methods="10" coveredmethods="9"/>
@@ -72,7 +101,20 @@
       </file>
     </package>
     <package name="dist.models">
-      <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="1" coveredmethods="1"/>
+      <metrics statements="17" coveredstatements="14" conditionals="14" coveredconditionals="12" methods="3" coveredmethods="2"/>
+      <file name="tokenGenerator.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/models/tokenGenerator.js">
+        <metrics statements="10" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="2" coveredmethods="1"/>
+        <line num="2" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="3" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+      </file>
       <file name="user.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/models/user.js">
         <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="2" count="3" type="cond" truecount="3" falsecount="0"/>
@@ -85,8 +127,17 @@
       </file>
     </package>
     <package name="dist.routes">
-      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="randomFilm.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/routes/randomFilm.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+      <file name="tokens.js" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/dist/routes/tokens.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -124,26 +175,28 @@
       </file>
     </package>
     <package name="src">
-      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="server.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/server.ts">
-        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <metrics statements="30" coveredstatements="20" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="4"/>
       <file name="randomFilm.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/controllers/randomFilm.ts">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="3" count="2" type="stmt"/>
@@ -155,6 +208,22 @@
         <line num="18" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
+      </file>
+      <file name="tokens.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/controllers/tokens.ts">
+        <metrics statements="13" coveredstatements="3" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
       </file>
       <file name="users.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/controllers/users.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -169,7 +238,15 @@
       </file>
     </package>
     <package name="src.models">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="9" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="tokenGenerator.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/models/tokenGenerator.ts">
+        <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
       <file name="user.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/models/user.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
@@ -179,8 +256,16 @@
       </file>
     </package>
     <package name="src.routes">
-      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="randomFilm.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/routes/randomFilm.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="tokens.ts" path="/Users/marinapapap/Desktop/Projects/Javascript/film-finder/api/src/routes/tokens.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>

@@ -25,7 +25,10 @@ exports.TokensController = {
         }
         if (user.password === password) {
             const token = yield (0, tokenGenerator_1.generateToken)(user.id);
-            return res.status(201).json({ token: token, message: "OK" });
+            return res
+                .status(201)
+                .cookie("token", token, { httpOnly: true })
+                .json({ message: "OK" });
         }
         else {
             return res.status(401).json({ message: "auth error" });
