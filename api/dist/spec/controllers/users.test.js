@@ -44,4 +44,79 @@ describe("RandomFilmController", () => {
         let newUser = users[users.length - 1];
         expect(newUser.email).toEqual("test@email.com");
     }));
+    describe("when password NOT provided", () => {
+        it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
+            let response = yield (0, supertest_1.default)(server_1.app)
+                .post("/users")
+                .send({ username: "film-expert", email: "test@email.com" });
+            expect(response.status).toBe(400);
+        }));
+        it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield (0, supertest_1.default)(server_1.app)
+                .post("/users")
+                .send({ username: "film-expert", email: "test@email.com" });
+            let users = yield user_1.default.find();
+            expect(users.length).toEqual(0);
+        }));
+    });
+    describe("when email NOT provided", () => {
+        it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
+            let response = yield (0, supertest_1.default)(server_1.app)
+                .post("/users")
+                .send({ username: "film-expert", password: "password" });
+            expect(response.status).toBe(400);
+        }));
+        it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield (0, supertest_1.default)(server_1.app)
+                .post("/users")
+                .send({ username: "film-expert", password: "password" });
+            let users = yield user_1.default.find();
+            expect(users.length).toEqual(0);
+        }));
+    });
+    describe("when email is invalid", () => {
+        it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
+            let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
+                username: "film-expert",
+                email: "testemail.com",
+                password: "password",
+            });
+            expect(response.status).toBe(400);
+        }));
+        it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield (0, supertest_1.default)(server_1.app).post("/users").send({
+                username: "film-expert",
+                email: "testemail.com",
+                password: "password",
+            });
+            let users = yield user_1.default.find();
+            expect(users.length).toEqual(0);
+        }));
+    });
+    describe("email has already been used", () => {
+        beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+            yield user_1.default.create({
+                username: "film-expert",
+                email: "test@email.com",
+                password: "password1",
+            });
+        }));
+        it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
+            let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
+                username: "film-expert",
+                email: "test@email.com",
+                password: "password2",
+            });
+            expect(response.status).toBe(400);
+        }));
+        it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
+            yield (0, supertest_1.default)(server_1.app).post("/users").send({
+                username: "film-expert",
+                email: "test@email.com",
+                password: "password2",
+            });
+            let users = yield user_1.default.find();
+            expect(users.length).toEqual(1);
+        }));
+    });
 });
