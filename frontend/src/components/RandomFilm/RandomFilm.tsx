@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
+import { LogoutForm } from "../Auth/Logout";
 
 interface Film {
   result: {
@@ -33,7 +34,21 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       imDbRatingCount: "",
     },
   });
-  const [renderFilm, setRenderFilm] = useState<Boolean>(false);
+  const [renderFilm, setRenderFilm] = useState<boolean>(false);
+  const [inSession, setInSession] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch("/tokens/validate", {})
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setInSession(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setInSession(false);
+      });
+  }, []);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -68,6 +83,9 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
   return (
     <div className="App">
+      <div className="float:right;">
+        <LogoutForm navigate={navigate} inSession={inSession} />
+      </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
       <button type="submit" onClick={handleSubmit} data-cy="button">
         Film Roulette

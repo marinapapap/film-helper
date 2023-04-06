@@ -18,7 +18,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let response = await fetch("/login", {
+    let response = await fetch("/tokens/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
