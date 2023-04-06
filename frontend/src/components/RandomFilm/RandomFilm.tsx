@@ -19,7 +19,7 @@ interface RandomFilmProps {
   navigate: Function;
 }
 
-const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
+export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [randomFilm, setRandomFilm] = useState<Film>({
     result: {
       id: "",
@@ -38,17 +38,14 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    fetch("/randomFilm")
-      .then((response) => {
-        return response.json() as Promise<Film>;
-      })
-      .then(async (data) => {
-        setRandomFilm(data);
-        setRenderFilm(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      const response = await fetch("/randomFilm");
+      const data = (await response.json()) as Film;
+      setRandomFilm(data);
+      setRenderFilm(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const showRandomFilm = (): JSX.Element => {
@@ -78,5 +75,3 @@ const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     </div>
   );
 };
-
-export default RandomFilm;

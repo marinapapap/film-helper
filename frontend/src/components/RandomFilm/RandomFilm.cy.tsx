@@ -1,4 +1,4 @@
-import RandomFilm from "./RandomFilm";
+import { RandomFilm } from "./RandomFilm";
 
 const navigate = () => {};
 
