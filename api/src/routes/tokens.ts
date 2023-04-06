@@ -3,6 +3,8 @@ import { TokensController } from "../controllers/tokens";
 
 const router: Router = Router();
 
-router.get("/", TokensController.Create);
+router.post("/login", TokensController.Create);
+router.get("/logout", TokensController.Clear);
+router.get("/validate", TokensController.Check);
 
 export default router;

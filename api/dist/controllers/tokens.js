@@ -35,7 +35,11 @@ exports.TokensController = {
             return res.status(401).json({ message: "auth error" });
         }
     }),
-    Check: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        res.clearCookie("token");
+        res.send({ success: true });
+    }),
+    Check: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = req.cookies.token;
         if (!token) {
             return res.status(401).send("Access denied...No token provided...");
@@ -46,8 +50,7 @@ exports.TokensController = {
                 res.status(401).json({ message: "auth error" });
             }
             else {
-                req.body.user_id = payload.user_id;
-                next();
+                res.status(201).json({ message: "user in session" });
             }
         });
     }),

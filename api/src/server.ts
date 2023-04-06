@@ -18,6 +18,6 @@ import tokensRouter from "./routes/tokens";
 
 // routes
 
-app.use("/randomFilm", TokensController.Check, randomFilmRouter);
+app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);

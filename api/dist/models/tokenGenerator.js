@@ -7,6 +7,7 @@ exports.generateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const generateToken = (userId) => {
     const secret = process.env.JWT_SECRET;
+    console.log(secret);
     const token = jsonwebtoken_1.default.sign({ user_id: userId, iat: Math.floor(Date.now() / 1000) }, secret);
     return token;
 };

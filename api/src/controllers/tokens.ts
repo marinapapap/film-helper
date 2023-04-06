@@ -24,7 +24,12 @@ export const TokensController = {
     }
   },
 
-  Check: async (req: Request, res: Response, next: NextFunction) => {
+  Clear: async (req: Request, res: Response) => {
+    res.clearCookie("token");
+    res.send({ success: true });
+  },
+
+  Check: async (req: Request, res: Response) => {
     const token = req.cookies.token;
 
     if (!token) {
@@ -39,8 +44,7 @@ export const TokensController = {
           console.log(error);
           res.status(401).json({ message: "auth error" });
         } else {
-          req.body.user_id = payload.user_id;
-          next();
+          res.status(201).json({ message: "user in session" });
         }
       }
     );
