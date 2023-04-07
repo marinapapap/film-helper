@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import { LogoutForm } from "../Auth/Logout";
+import { Logout } from "../Auth/Logout";
 
 interface Film {
   result: {
@@ -87,7 +87,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   return (
     <div className="App">
       <div className="float:right;">
-        <LogoutForm navigate={navigate} inSession={inSession} />
+        <Logout navigate={navigate} inSession={inSession} />
       </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
       <button type="submit" onClick={handleSubmit} data-cy="button">

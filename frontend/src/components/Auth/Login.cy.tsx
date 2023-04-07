@@ -10,4 +10,12 @@ describe("Login", () => {
   it("renders email field", () => {
     cy.get('[data-cy="login-email"]').should("be.visible");
   });
+
+  it("renders password field", () => {
+    cy.get('[data-cy="login-password"]').should("be.visible");
+  });
+
+  it("renders submit button", () => {
+    cy.get('[data-cy="login-submit"]').should("be.visible");
+  });
 });

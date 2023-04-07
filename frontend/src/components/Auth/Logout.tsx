@@ -1,15 +1,12 @@
 import React from "react";
 import "../../App.css";
 
-interface LogoutFormProps {
+interface LogoutProps {
   navigate: Function;
   inSession: boolean;
 }
 
-export const LogoutForm: React.FC<LogoutFormProps> = ({
-  navigate,
-  inSession,
-}) => {
+export const Logout: React.FC<LogoutProps> = ({ navigate, inSession }) => {
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
