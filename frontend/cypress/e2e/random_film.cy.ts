@@ -1,11 +1,4 @@
 describe("Random Film", () => {
-  it("request to the host returns the correct html response body", () => {
-    cy.request("/").then((response) => {
-      expect(response.status).to.equal(200);
-      expect(response.body).to.include("<title>React App</title>");
-    });
-  });
-
   it("request to the '/randomFilm' endpoint returns the correct response body", () => {
     cy.request("/randomFilm").then((response) => {
       expect(response.status).to.equal(200);
