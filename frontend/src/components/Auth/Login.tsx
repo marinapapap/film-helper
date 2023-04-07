@@ -18,19 +18,21 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let response = await fetch("/tokens/login", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    });
+    try {
+      const response = await fetch("/tokens/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
 
-    if (response.status !== 201) {
-    } else {
-      let data = await response.json();
-      window.localStorage.setItem("token", data.token);
-      navigate("/film");
+      if (response.status !== 201) {
+      } else {
+        navigate("/film");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 

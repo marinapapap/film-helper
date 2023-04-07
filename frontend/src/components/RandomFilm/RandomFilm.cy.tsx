@@ -1,10 +1,13 @@
 import { RandomFilm } from "./RandomFilm";
 
 const navigate = () => {};
+const setGlobalSession = () => {};
 
 describe("RandomFilm", () => {
   beforeEach(() => {
-    cy.mount(<RandomFilm navigate={navigate} />);
+    cy.mount(
+      <RandomFilm navigate={navigate} setGlobalSession={setGlobalSession} />
+    );
   });
 
   it("renders button", () => {

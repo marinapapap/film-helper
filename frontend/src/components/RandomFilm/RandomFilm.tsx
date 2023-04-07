@@ -18,9 +18,13 @@ interface Film {
 
 interface RandomFilmProps {
   navigate: Function;
+  setGlobalSession: Function;
 }
 
-export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
+export const RandomFilm: React.FC<RandomFilmProps> = ({
+  navigate,
+  setGlobalSession,
+}) => {
   const [randomFilm, setRandomFilm] = useState<Film>({
     result: {
       id: "",
@@ -40,12 +44,11 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   useEffect(() => {
     fetch("/tokens/validate", {})
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         setInSession(true);
+        setGlobalSession(true);
       })
       .catch((error) => {
-        console.log(error);
         setInSession(false);
       });
   }, []);

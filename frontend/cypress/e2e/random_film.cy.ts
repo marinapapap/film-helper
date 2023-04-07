@@ -14,12 +14,12 @@ describe("Random Film", () => {
   });
 
   it("homepage is rendered corrently", () => {
-    cy.visit("/");
+    cy.visit("/film");
     cy.get('[data-cy="button"]').should("be.visible");
   });
 
   it("renders random film info when button is clicked", () => {
-    cy.visit("/");
+    cy.visit("/film");
     cy.get('[data-cy="button"]').click();
     cy.get('[data-cy="fulltitle"]').should("be.visible");
     cy.get('[data-cy="image"]').should("be.visible");
@@ -28,7 +28,7 @@ describe("Random Film", () => {
   });
 
   it("does not render random film info before the button is clicked", () => {
-    cy.visit("/");
+    cy.visit("/film");
 
     cy.get('[data-cy="fulltitle"]').should("not.exist");
     cy.get('[data-cy="image"]').should("not.exist");
@@ -56,7 +56,7 @@ describe("Random Film", () => {
       });
     }).as("getFilm");
 
-    cy.visit("/");
+    cy.visit("/film");
     cy.get('[data-cy="button"]').click();
 
     cy.wait("@getFilm").then(() => {
