@@ -42,15 +42,22 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   const [inSession, setInSession] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch("/tokens/validate", {})
-      .then((response) => response.json())
-      .then(() => {
-        setInSession(true);
-        setGlobalSession(true);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/tokens/validate");
+        const responseData = await response.json();
+
+        if (responseData.session === true) {
+          setInSession(true);
+          setGlobalSession(true);
+        }
+      } catch (error) {
         setInSession(false);
-      });
+        console.error(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {

@@ -42,7 +42,9 @@ exports.TokensController = {
     Check: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = req.cookies.token;
         if (!token) {
-            return res.status(401).send("Access denied...No token provided...");
+            return res
+                .status(201)
+                .json({ message: "no user in session", session: false });
         }
         jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, (error, payload) => {
             if (error) {
@@ -50,7 +52,7 @@ exports.TokensController = {
                 res.status(401).json({ message: "auth error" });
             }
             else {
-                res.status(201).json({ message: "user in session" });
+                res.status(201).json({ message: "user in session", session: true });
             }
         });
     }),

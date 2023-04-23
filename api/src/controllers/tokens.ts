@@ -33,7 +33,9 @@ export const TokensController = {
     const token = req.cookies.token;
 
     if (!token) {
-      return res.status(401).send("Access denied...No token provided...");
+      return res
+        .status(201)
+        .json({ message: "no user in session", session: false });
     }
 
     JWT.verify(
@@ -44,7 +46,7 @@ export const TokensController = {
           console.log(error);
           res.status(401).json({ message: "auth error" });
         } else {
-          res.status(201).json({ message: "user in session" });
+          res.status(201).json({ message: "user in session", session: true });
         }
       }
     );
