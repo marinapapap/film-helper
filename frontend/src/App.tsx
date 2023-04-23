@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Routes>
       <Route
-        path="/film"
+        path="/"
         element={
           <RandomFilm
             navigate={useNavigate()}
@@ -17,7 +17,15 @@ const App = () => {
           />
         }
       />
-      <Route path="/" element={<LoginForm navigate={useNavigate()} />} />
+      <Route
+        path="/login"
+        element={
+          <LoginForm
+            navigate={useNavigate()}
+            setGlobalSession={setGlobalSession}
+          />
+        }
+      />
       <Route path="/signup" element={<SignupForm navigate={useNavigate()} />} />
     </Routes>
   );

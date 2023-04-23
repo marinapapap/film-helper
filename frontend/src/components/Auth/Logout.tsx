@@ -4,14 +4,21 @@ import "../../App.css";
 interface LogoutProps {
   navigate: Function;
   inSession: boolean;
+  setInSession: Function;
 }
 
-export const Logout: React.FC<LogoutProps> = ({ navigate, inSession }) => {
+export const Logout: React.FC<LogoutProps> = ({
+  navigate,
+  inSession,
+  setInSession,
+}) => {
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     try {
       await fetch("/tokens/logout");
+
+      setInSession(false);
       navigate("/");
     } catch (error) {
       console.error(error);

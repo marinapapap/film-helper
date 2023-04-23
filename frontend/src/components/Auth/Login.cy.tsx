@@ -1,10 +1,13 @@
 import { LoginForm } from "./Login";
 
 const navigate = () => {};
+const setGlobalSession = () => {};
 
 describe("Login", () => {
   beforeEach(() => {
-    cy.mount(<LoginForm navigate={navigate} />);
+    cy.mount(
+      <LoginForm navigate={navigate} setGlobalSession={setGlobalSession} />
+    );
   });
 
   it("renders email field", () => {

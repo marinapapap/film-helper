@@ -94,7 +94,11 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   return (
     <div className="App">
       <div className="float:right;">
-        <Logout navigate={navigate} inSession={inSession} />
+        <Logout
+          navigate={navigate}
+          inSession={inSession}
+          setInSession={setInSession}
+        />
       </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
       <button type="submit" onClick={handleSubmit} data-cy="button">
