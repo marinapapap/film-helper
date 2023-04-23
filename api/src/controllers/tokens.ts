@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { generateToken } from "../models/tokenGenerator";
 import JWT from "jsonwebtoken";
 import User, { IUser } from "../models/user";
@@ -44,9 +44,11 @@ export const TokensController = {
       (error: any, payload: any) => {
         if (error) {
           console.log(error);
-          res.status(401).json({ message: "auth error" });
+          return res.status(401).json({ message: "auth error" });
         } else {
-          res.status(201).json({ message: "user in session", session: true });
+          return res
+            .status(201)
+            .json({ message: "user in session", session: true });
         }
       }
     );

@@ -49,10 +49,12 @@ exports.TokensController = {
         jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, (error, payload) => {
             if (error) {
                 console.log(error);
-                res.status(401).json({ message: "auth error" });
+                return res.status(401).json({ message: "auth error" });
             }
             else {
-                res.status(201).json({ message: "user in session", session: true });
+                return res
+                    .status(201)
+                    .json({ message: "user in session", session: true });
             }
         });
     }),
