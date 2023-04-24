@@ -4,6 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const filmSchema = new mongoose_1.default.Schema({
+    filmId: { type: String, required: true },
+    filmTitle: { type: String, required: true },
+});
 const UserSchema = new mongoose_1.default.Schema({
     username: { type: String, required: true },
     email: {
@@ -14,6 +18,7 @@ const UserSchema = new mongoose_1.default.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
     },
     password: { type: String, required: true },
+    films: [filmSchema],
 });
 const User = mongoose_1.default.model("User", UserSchema);
 exports.default = User;
