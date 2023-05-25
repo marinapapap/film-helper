@@ -25,6 +25,10 @@ export const Logout: React.FC<LogoutProps> = ({
     }
   };
 
+  const redirectToLogin = () => {
+    navigate("/login");
+  };
+
   if (inSession) {
     return (
       <div className="App">
@@ -34,6 +38,12 @@ export const Logout: React.FC<LogoutProps> = ({
       </div>
     );
   } else {
-    return <></>;
+    return (
+      <div className="App">
+        <button type="submit" onClick={redirectToLogin} data-cy="login-button">
+          Login
+        </button>
+      </div>
+    );
   }
 };
