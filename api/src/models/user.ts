@@ -12,7 +12,7 @@ export interface IUser {
   films: IFilm[];
 }
 
-const filmSchema = new mongoose.Schema<IFilm>({
+const FilmSchema = new mongoose.Schema<IFilm>({
   filmId: { type: String, required: true },
   filmTitle: { type: String, required: true },
 });
@@ -27,9 +27,10 @@ const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
   } as any,
   password: { type: String, required: true } as any,
-  films: [filmSchema],
+  films: [FilmSchema],
 });
 
 const User: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
+const Film: Model<IFilm> = mongoose.model<IFilm>("Film", FilmSchema);
 
-export default User;
+export { User, Film };
