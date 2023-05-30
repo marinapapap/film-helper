@@ -20,10 +20,10 @@ export interface IUser {
 }
 
 const FilmSchema = new mongoose.Schema<IFilm>({
-  id: { type: String },
+  id: { type: String, required: true },
   rank: { type: String },
   title: { type: String },
-  fullTitle: { type: String },
+  fullTitle: { type: String, required: true },
   year: { type: String },
   image: { type: String },
   crew: { type: String },

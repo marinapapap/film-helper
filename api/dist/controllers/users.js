@@ -42,7 +42,7 @@ exports.UsersController = {
             // Validate the film data
             const { film } = req.body;
             console.log(film);
-            if (!film || !film.id || !film.title) {
+            if (!film || !film.id || !film.fullTitle) {
                 return res.status(400).json({ message: "Invalid film data" });
             }
             // Find the user and save the film

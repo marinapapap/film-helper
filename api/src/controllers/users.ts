@@ -33,7 +33,7 @@ export const UsersController = {
       // Validate the film data
       const { film }: { film: IFilm } = req.body;
       console.log(film);
-      if (!film || !film.id || !film.title) {
+      if (!film || !film.id || !film.fullTitle) {
         return res.status(400).json({ message: "Invalid film data" });
       }
 
