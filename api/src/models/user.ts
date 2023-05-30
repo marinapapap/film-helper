@@ -1,8 +1,15 @@
 import mongoose, { Schema, Model } from "mongoose";
 
 export interface IFilm {
-  filmId: string;
-  filmTitle: string;
+  id: string;
+  rank: string;
+  title: string;
+  fullTitle: string;
+  year: string;
+  image: string;
+  crew: string;
+  imDbRating: string;
+  imDbRatingCount: string;
 }
 
 export interface IUser {
@@ -13,8 +20,15 @@ export interface IUser {
 }
 
 const FilmSchema = new mongoose.Schema<IFilm>({
-  filmId: { type: String, required: true },
-  filmTitle: { type: String, required: true },
+  id: { type: String },
+  rank: { type: String },
+  title: { type: String },
+  fullTitle: { type: String },
+  year: { type: String },
+  image: { type: String },
+  crew: { type: String },
+  imDbRating: { type: String },
+  imDbRatingCount: { type: String },
 });
 
 const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({

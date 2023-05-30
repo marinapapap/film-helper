@@ -20,22 +20,6 @@ export const UsersController = {
 
   SaveFilm: async (req: Request, res: Response) => {
     try {
-      // const token = req.cookies.token;
-      // let userId = null;
-
-      // JWT.verify(
-      //   token,
-      //   process.env.JWT_SECRET as string,
-      //   (error: any, payload: any) => {
-      //     if (error) {
-      //       console.log(error);
-      //       return res.status(401).json({ message: "auth error" });
-      //     } else {
-      //       userId = payload.user_id;
-      //     }
-      //   }
-      // );
-
       // get user_id
       const token = req.cookies.token;
       if (!token) {
@@ -46,29 +30,10 @@ export const UsersController = {
       };
       const userId = payload.user_id;
 
-      // const film = new Film({
-      //   ...req.body.film,
-      // });
-
-      // const user = await User.findOne({ _id: userId });
-      // if (!user) {
-      //   return res
-      //     .status(401)
-      //     .json({ message: "Couldn't find user based on user ID" });
-      // } else {
-      //   user.films.push(film);
-      //   try {
-      //     await user.save();
-      //     return res.status(201).json({ user: user });
-      //   } catch (error) {
-      //     return res.status(500).json({ message: "Failed to save film to user" });
-      //   }
-      // }
-
       // Validate the film data
       const { film }: { film: IFilm } = req.body;
       console.log(film);
-      if (!film || !film.filmId || !film.filmTitle) {
+      if (!film || !film.id || !film.title) {
         return res.status(400).json({ message: "Invalid film data" });
       }
 
@@ -84,6 +49,7 @@ export const UsersController = {
       user.films.push(filmData);
       await user.save();
 
+      console.log(user);
       return res.status(201).json({ user });
     } catch (error) {
       // Handle the error

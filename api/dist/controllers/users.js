@@ -32,20 +32,6 @@ exports.UsersController = {
     }),
     SaveFilm: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            // const token = req.cookies.token;
-            // let userId = null;
-            // JWT.verify(
-            //   token,
-            //   process.env.JWT_SECRET as string,
-            //   (error: any, payload: any) => {
-            //     if (error) {
-            //       console.log(error);
-            //       return res.status(401).json({ message: "auth error" });
-            //     } else {
-            //       userId = payload.user_id;
-            //     }
-            //   }
-            // );
             // get user_id
             const token = req.cookies.token;
             if (!token) {
@@ -53,27 +39,10 @@ exports.UsersController = {
             }
             const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
             const userId = payload.user_id;
-            // const film = new Film({
-            //   ...req.body.film,
-            // });
-            // const user = await User.findOne({ _id: userId });
-            // if (!user) {
-            //   return res
-            //     .status(401)
-            //     .json({ message: "Couldn't find user based on user ID" });
-            // } else {
-            //   user.films.push(film);
-            //   try {
-            //     await user.save();
-            //     return res.status(201).json({ user: user });
-            //   } catch (error) {
-            //     return res.status(500).json({ message: "Failed to save film to user" });
-            //   }
-            // }
             // Validate the film data
             const { film } = req.body;
             console.log(film);
-            if (!film || !film.filmId || !film.filmTitle) {
+            if (!film || !film.id || !film.title) {
                 return res.status(400).json({ message: "Invalid film data" });
             }
             // Find the user and save the film
@@ -84,6 +53,7 @@ exports.UsersController = {
             const filmData = Object.assign({}, film);
             user.films.push(filmData);
             yield user.save();
+            console.log(user);
             return res.status(201).json({ user });
         }
         catch (error) {

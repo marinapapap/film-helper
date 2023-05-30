@@ -6,8 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Film = exports.User = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const FilmSchema = new mongoose_1.default.Schema({
-    filmId: { type: String, required: true },
-    filmTitle: { type: String, required: true },
+    id: { type: String },
+    rank: { type: String },
+    title: { type: String },
+    fullTitle: { type: String },
+    year: { type: String },
+    image: { type: String },
+    crew: { type: String },
+    imDbRating: { type: String },
+    imDbRatingCount: { type: String },
 });
 const UserSchema = new mongoose_1.default.Schema({
     username: { type: String, required: true },

@@ -73,6 +73,26 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
     }
   };
 
+  const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    try {
+      await fetch("/users/films", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          film: {
+            ...randomFilm.result,
+          },
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const showRandomFilm = (): JSX.Element => {
     return (
       <>
@@ -101,9 +121,14 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
         />
       </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
-      <button type="submit" onClick={handleSubmit} data-cy="button">
-        Film Roulette
-      </button>
+      <div>
+        <button type="submit" onClick={handleSubmit} data-cy="button">
+          Film Roulette
+        </button>
+        <button type="submit" onClick={handleSave} data-cy="button">
+          Save For Later
+        </button>
+      </div>
     </div>
   );
 };

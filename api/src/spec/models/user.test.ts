@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import "../mongodb_helper";
-import User, { IUser } from "../../models/user";
+import { User } from "../../models/user";
 
 describe("User model", () => {
   beforeEach(async () => {

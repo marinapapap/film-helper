@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { generateToken } from "../models/tokenGenerator";
 import JWT from "jsonwebtoken";
-import User, { IUser } from "../models/user";
+import { User } from "../models/user";
 
 export const TokensController = {
   Create: async (req: Request, res: Response) => {

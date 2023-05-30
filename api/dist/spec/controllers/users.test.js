@@ -17,14 +17,14 @@ const server_1 = require("../../server");
 const jest_fetch_mock_1 = __importDefault(require("jest-fetch-mock"));
 require("../mongodb_helper");
 require("jest-fetch-mock").enableMocks();
-const user_1 = __importDefault(require("../../models/user"));
+const user_1 = require("../../models/user");
 describe("RandomFilmController", () => {
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
         jest_fetch_mock_1.default.resetMocks();
-        yield user_1.default.deleteMany({});
+        yield user_1.User.deleteMany({});
     }));
     afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
-        yield user_1.default.deleteMany({});
+        yield user_1.User.deleteMany({});
     }));
     it("gives response code 201", () => __awaiter(void 0, void 0, void 0, function* () {
         let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
@@ -40,7 +40,7 @@ describe("RandomFilmController", () => {
             email: "test@email.com",
             password: "password",
         });
-        let users = yield user_1.default.find();
+        let users = yield user_1.User.find();
         let newUser = users[users.length - 1];
         expect(newUser.email).toEqual("test@email.com");
     }));
@@ -55,7 +55,7 @@ describe("RandomFilmController", () => {
             yield (0, supertest_1.default)(server_1.app)
                 .post("/users")
                 .send({ username: "film-expert", email: "test@email.com" });
-            let users = yield user_1.default.find();
+            let users = yield user_1.User.find();
             expect(users.length).toEqual(0);
         }));
     });
@@ -70,7 +70,7 @@ describe("RandomFilmController", () => {
             yield (0, supertest_1.default)(server_1.app)
                 .post("/users")
                 .send({ username: "film-expert", password: "password" });
-            let users = yield user_1.default.find();
+            let users = yield user_1.User.find();
             expect(users.length).toEqual(0);
         }));
     });
@@ -89,13 +89,13 @@ describe("RandomFilmController", () => {
                 email: "testemail.com",
                 password: "password",
             });
-            let users = yield user_1.default.find();
+            let users = yield user_1.User.find();
             expect(users.length).toEqual(0);
         }));
     });
     describe("email has already been used", () => {
         beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-            yield user_1.default.create({
+            yield user_1.User.create({
                 username: "film-expert",
                 email: "test@email.com",
                 password: "password1",
@@ -115,7 +115,7 @@ describe("RandomFilmController", () => {
                 email: "test@email.com",
                 password: "password2",
             });
-            let users = yield user_1.default.find();
+            let users = yield user_1.User.find();
             expect(users.length).toEqual(1);
         }));
     });
