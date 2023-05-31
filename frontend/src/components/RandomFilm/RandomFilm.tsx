@@ -40,6 +40,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   });
   const [renderFilm, setRenderFilm] = useState<boolean>(false);
   const [inSession, setInSession] = useState<boolean>(false);
+  const [saved, setSaved] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,9 +66,10 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
 
     try {
       const response = await fetch("/randomFilm");
-      const data = (await response.json()) as Film;
+      const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
+      setSaved(data.saved);
     } catch (error) {
       console.error(error);
     }
@@ -88,6 +90,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
           },
         }),
       });
+      setSaved(true);
     } catch (error) {
       console.error(error);
     }
@@ -125,9 +128,19 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
         <button type="submit" onClick={handleSubmit} data-cy="button">
           Film Roulette
         </button>
-        <button type="submit" onClick={handleSave} data-cy="button">
-          Save For Later
-        </button>
+        {saved === false ? (
+          <>
+            <button type="submit" onClick={handleSave} data-cy="button">
+              Save For Later
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="button" data-cy="button-disabled" disabled>
+              Saved
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
