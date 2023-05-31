@@ -32,7 +32,7 @@ export const UsersController = {
 
       // Validate the film data
       const { film }: { film: IFilm } = req.body;
-      console.log(film);
+
       if (!film || !film.id || !film.fullTitle) {
         return res.status(400).json({ message: "Invalid film data" });
       }
@@ -49,7 +49,6 @@ export const UsersController = {
       user.films.push(filmData);
       await user.save();
 
-      console.log(user);
       return res.status(201).json({ user });
     } catch (error) {
       // Handle the error
