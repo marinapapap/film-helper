@@ -27,26 +27,28 @@ exports.RandomFilmController = {
         }
         // get random film from top 250
         const random = Math.floor(Math.random() * top250Films.items.length);
-        const filmToCheck = top250Films.items[random];
+        const randomFilm = top250Films.items[random];
         // get user_id
         const token = req.cookies.token;
         if (!token) {
-            return res.status(401).json({ message: "Authentication required" });
+            return res.status(200).json({ result: randomFilm });
         }
-        const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-        const userId = payload.user_id;
-        // Find the user and save the film
-        const user = yield user_1.User.findOne({ _id: userId });
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+        else {
+            const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+            const userId = payload.user_id;
+            // Find the user and save the film
+            const user = yield user_1.User.findOne({ _id: userId });
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            // search for saved film
+            let saved = false;
+            user.films.forEach((film) => {
+                film.id == randomFilm.id ? (saved = true) : saved;
+            });
+            return res
+                .status(200)
+                .json({ result: top250Films.items[random], saved: saved });
         }
-        // search for saved film
-        let saved = false;
-        user.films.forEach((film) => {
-            film.id == filmToCheck.id ? (saved = true) : saved;
-        });
-        return res
-            .status(200)
-            .json({ result: top250Films.items[random], saved: saved });
     }),
 };

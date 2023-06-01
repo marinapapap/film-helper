@@ -33,7 +33,7 @@ export const UsersController = {
       // Validate the film data
       const { film }: { film: IFilm } = req.body;
 
-      if (!film || !film.id || !film.fullTitle) {
+      if (!film || !film.id || !film.title) {
         return res.status(400).json({ message: "Invalid film data" });
       }
 
@@ -49,7 +49,7 @@ export const UsersController = {
       user.films.push(filmData);
       await user.save();
 
-      return res.status(201).json({ user });
+      return res.status(201).json({ user: user, message: "ok" });
     } catch (error) {
       // Handle the error
       console.error("Error saving film:", error);

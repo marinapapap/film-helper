@@ -41,7 +41,7 @@ exports.UsersController = {
             const userId = payload.user_id;
             // Validate the film data
             const { film } = req.body;
-            if (!film || !film.id || !film.fullTitle) {
+            if (!film || !film.id || !film.title) {
                 return res.status(400).json({ message: "Invalid film data" });
             }
             // Find the user and save the film
@@ -52,7 +52,7 @@ exports.UsersController = {
             const filmData = Object.assign({}, film);
             user.films.push(filmData);
             yield user.save();
-            return res.status(201).json({ user });
+            return res.status(201).json({ user: user, message: "ok" });
         }
         catch (error) {
             // Handle the error
