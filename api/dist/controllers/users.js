@@ -15,11 +15,8 @@ const helperFunctions_1 = require("../helperFunctions");
 exports.UsersController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const user = new user_1.User({
-                username: req.body.username,
-                email: req.body.email,
-                password: req.body.password,
-            });
+            const user = new user_1.User(Object.assign({}, req.body));
+            console.log(user);
             yield user.save();
             return res.status(201).json({ message: "OK" });
         }

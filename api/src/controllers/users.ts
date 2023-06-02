@@ -6,10 +6,9 @@ export const UsersController = {
   Create: async (req: Request, res: Response) => {
     try {
       const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
+        ...req.body,
       });
+      console.log(user);
 
       await user.save();
       return res.status(201).json({ message: "OK" });
