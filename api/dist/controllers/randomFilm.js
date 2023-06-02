@@ -17,38 +17,41 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = require("../models/user");
 exports.RandomFilmController = {
     Find: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        let top250Films = { items: [] };
         try {
-            let response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
-            top250Films = yield response.json();
-        }
-        catch (error) {
-            return res.status(500).json({ message: "Failed to fetch top 250 films" });
-        }
-        // get random film from top 250
-        const random = Math.floor(Math.random() * top250Films.items.length);
-        const randomFilm = top250Films.items[random];
-        // get user_id
-        const token = req.cookies.token;
-        if (!token) {
-            return res.status(200).json({ result: randomFilm });
-        }
-        else {
-            const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-            const userId = payload.user_id;
-            // Find the user and save the film
-            const user = yield user_1.User.findOne({ _id: userId });
+            const top250Films = yield fetchTop250Films();
+            const randomFilm = getRandomFilm(top250Films.items);
+            const token = req.cookies.token;
+            if (!token) {
+                return res.status(200).json({ result: randomFilm });
+            }
+            const userId = getUserIdFromToken(token);
+            const user = yield findUserById(userId);
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
-            // search for saved film
-            let saved = false;
-            user.films.forEach((film) => {
-                film.id == randomFilm.id ? (saved = true) : saved;
-            });
-            return res
-                .status(200)
-                .json({ result: top250Films.items[random], saved: saved });
+            const saved = searchForSavedFilm(user.films, randomFilm.id);
+            return res.status(200).json({ result: randomFilm, saved });
+        }
+        catch (error) {
+            return res.status(500).json({ message: "Failed to fetch random film" });
         }
     }),
+};
+const fetchTop250Films = () => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
+    return response.json();
+});
+const getRandomFilm = (films) => {
+    const random = Math.floor(Math.random() * films.length);
+    return films[random];
+};
+const getUserIdFromToken = (token) => {
+    const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+    return payload.user_id;
+};
+const findUserById = (userId) => {
+    return user_1.User.findOne({ _id: userId });
+};
+const searchForSavedFilm = (films, filmId) => {
+    return films.some((film) => film.id === filmId);
 };
