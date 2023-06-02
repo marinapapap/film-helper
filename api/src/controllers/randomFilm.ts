@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import JWT from "jsonwebtoken";
-import { User } from "../models/user";
+import { getUserIdFromToken, findUserById } from "../helperFunctions";
 
 export const RandomFilmController = {
   Find: async (req: Request, res: Response) => {
@@ -15,7 +14,6 @@ export const RandomFilmController = {
 
       const userId = getUserIdFromToken(token);
       const user = await findUserById(userId);
-
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -39,17 +37,6 @@ const fetchTop250Films = async () => {
 const getRandomFilm = (films: any[]) => {
   const random = Math.floor(Math.random() * films.length);
   return films[random];
-};
-
-const getUserIdFromToken = (token: string) => {
-  const payload = JWT.verify(token, process.env.JWT_SECRET as string) as {
-    user_id: string;
-  };
-  return payload.user_id;
-};
-
-const findUserById = (userId: string) => {
-  return User.findOne({ _id: userId });
 };
 
 const searchForSavedFilm = (films: any[], filmId: string) => {

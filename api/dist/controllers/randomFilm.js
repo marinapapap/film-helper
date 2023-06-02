@@ -8,13 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RandomFilmController = void 0;
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_1 = require("../models/user");
+const helperFunctions_1 = require("../helperFunctions");
 exports.RandomFilmController = {
     Find: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -24,8 +20,8 @@ exports.RandomFilmController = {
             if (!token) {
                 return res.status(200).json({ result: randomFilm });
             }
-            const userId = getUserIdFromToken(token);
-            const user = yield findUserById(userId);
+            const userId = (0, helperFunctions_1.getUserIdFromToken)(token);
+            const user = yield (0, helperFunctions_1.findUserById)(userId);
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
@@ -44,13 +40,6 @@ const fetchTop250Films = () => __awaiter(void 0, void 0, void 0, function* () {
 const getRandomFilm = (films) => {
     const random = Math.floor(Math.random() * films.length);
     return films[random];
-};
-const getUserIdFromToken = (token) => {
-    const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-    return payload.user_id;
-};
-const findUserById = (userId) => {
-    return user_1.User.findOne({ _id: userId });
 };
 const searchForSavedFilm = (films, filmId) => {
     return films.some((film) => film.id === filmId);

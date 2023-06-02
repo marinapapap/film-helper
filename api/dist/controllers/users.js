@@ -8,21 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const user_1 = require("../models/user");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const helperFunctions_1 = require("../helperFunctions");
 exports.UsersController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const user = new user_1.User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-        });
         try {
+            const user = new user_1.User({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+            });
             yield user.save();
             return res.status(201).json({ message: "OK" });
         }
@@ -32,30 +29,25 @@ exports.UsersController = {
     }),
     SaveFilm: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            // get user_id
             const token = req.cookies.token;
             if (!token) {
                 return res.status(401).json({ message: "Authentication required" });
             }
-            const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-            const userId = payload.user_id;
-            // Validate the film data
+            const userId = (0, helperFunctions_1.getUserIdFromToken)(token);
             const { film } = req.body;
             if (!film || !film.id || !film.title) {
                 return res.status(400).json({ message: "Invalid film data" });
             }
-            // Find the user and save the film
-            const user = yield user_1.User.findOne({ _id: userId });
+            const user = yield (0, helperFunctions_1.findUserById)(userId);
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
             const filmData = Object.assign({}, film);
             user.films.push(filmData);
             yield user.save();
-            return res.status(201).json({ user: user, message: "ok" });
+            return res.status(201).json({ user, message: "OK" });
         }
         catch (error) {
-            // Handle the error
             console.error("Error saving film:", error);
             return res.status(500).json({ message: "Failed to save film" });
         }

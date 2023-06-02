@@ -93,7 +93,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
       });
 
       const data = (await response.json()) as any;
-      data.message === "ok" ? setSaved(true) : setSaved(false);
+      data.message === "OK" ? setSaved(true) : setSaved(false);
     } catch (error) {
       setSaved(false);
       console.error(error);
