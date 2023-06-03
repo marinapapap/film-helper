@@ -49,4 +49,22 @@ exports.UsersController = {
             return res.status(500).json({ message: "Failed to save film" });
         }
     }),
+    GetFilms: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const token = req.cookies.token;
+            if (!token) {
+                return res.status(401).json({ message: "Authentication required" });
+            }
+            const userId = (0, helperFunctions_1.getUserIdFromToken)(token);
+            const user = yield (0, helperFunctions_1.findUserById)(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            return res.status(201).json({ films: user.films, message: "OK" });
+        }
+        catch (error) {
+            console.error("Error saving film:", error);
+            return res.status(500).json({ message: "Failed to save film" });
+        }
+    }),
 };

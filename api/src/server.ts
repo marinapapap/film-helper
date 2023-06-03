@@ -2,7 +2,6 @@ import express, { Express } from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
-import { TokensController } from "./controllers/tokens";
 
 config({ path: "./config.env" });
 
