@@ -63,8 +63,10 @@ exports.UsersController = {
             return res.status(201).json({ films: user.films, message: "OK" });
         }
         catch (error) {
-            console.error("Error saving film:", error);
-            return res.status(500).json({ message: "Failed to save film" });
+            console.error("Error getting films:", error);
+            return res
+                .status(500)
+                .json({ message: "Failed to get users saved films" });
         }
     }),
 };
