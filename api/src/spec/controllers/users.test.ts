@@ -5,7 +5,7 @@ import fetch from "jest-fetch-mock";
 require("../mongodb_helper");
 require("jest-fetch-mock").enableMocks();
 
-import User, { IUser } from "../../models/user";
+import { User } from "../../models/user";
 
 describe("RandomFilmController", () => {
   beforeEach(async () => {

@@ -15,12 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokensController = void 0;
 const tokenGenerator_1 = require("../models/tokenGenerator");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_1 = __importDefault(require("../models/user"));
+const user_1 = require("../models/user");
 exports.TokensController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const email = req.body.email;
         const password = req.body.password;
-        const user = yield user_1.default.findOne({ email: email });
+        const user = yield user_1.User.findOne({ email: email });
         if (!user) {
             return res.status(401).json({ message: "auth error" });
         }

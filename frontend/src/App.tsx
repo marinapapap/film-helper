@@ -3,6 +3,7 @@ import { useState } from "react";
 import { RandomFilm } from "./components/RandomFilm/RandomFilm";
 import { LoginForm } from "./components/Auth/Login";
 import { SignupForm } from "./components/Signup/Signup";
+import { SavedFilms } from "./components/SavedFilms/SavedFilms";
 
 const App = () => {
   const [globalSession, setGlobalSession] = useState<boolean>(false);
@@ -27,6 +28,15 @@ const App = () => {
         }
       />
       <Route path="/signup" element={<SignupForm navigate={useNavigate()} />} />
+      <Route
+        path="/savedFilms"
+        element={
+          <SavedFilms
+            navigate={useNavigate()}
+            setGlobalSession={setGlobalSession}
+          />
+        }
+      />
     </Routes>
   );
 };

@@ -10,17 +10,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RandomFilmController = void 0;
+const helperFunctions_1 = require("../helperFunctions");
 exports.RandomFilmController = {
     Find: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        let top250Films = { items: [] };
         try {
-            let response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
-            top250Films = yield response.json();
+            const top250Films = yield fetchTop250Films();
+            const randomFilm = getRandomFilm(top250Films.items);
+            const token = req.cookies.token;
+            if (!token) {
+                return res.status(200).json({ result: randomFilm });
+            }
+            const userId = (0, helperFunctions_1.getUserIdFromToken)(token);
+            const user = yield (0, helperFunctions_1.findUserById)(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            const saved = searchForSavedFilm(user.films, randomFilm.id);
+            return res.status(200).json({ result: randomFilm, saved });
         }
         catch (error) {
-            return res.status(500).json({ message: error });
+            return res.status(500).json({ message: "Failed to fetch random film" });
         }
-        const random = Math.floor(Math.random() * top250Films.items.length);
-        return res.status(200).json({ result: top250Films.items[random] });
     }),
+};
+const fetchTop250Films = () => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
+    return response.json();
+});
+const getRandomFilm = (films) => {
+    const random = Math.floor(Math.random() * films.length);
+    return films[random];
+};
+const searchForSavedFilm = (films, filmId) => {
+    return films.some((film) => film.id === filmId);
 };

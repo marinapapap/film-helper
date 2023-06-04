@@ -40,6 +40,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   });
   const [renderFilm, setRenderFilm] = useState<boolean>(false);
   const [inSession, setInSession] = useState<boolean>(false);
+  const [saved, setSaved] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,10 +66,36 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
 
     try {
       const response = await fetch("/randomFilm");
-      const data = (await response.json()) as Film;
+      const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
+      setSaved(data.saved);
+      console.log(data);
     } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("/users/films", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          film: {
+            ...randomFilm.result,
+          },
+        }),
+      });
+
+      const data = (await response.json()) as any;
+      data.message === "OK" ? setSaved(true) : setSaved(false);
+    } catch (error) {
+      setSaved(false);
       console.error(error);
     }
   };
@@ -76,7 +103,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   const showRandomFilm = (): JSX.Element => {
     return (
       <>
-        <p data-cy="fulltitle">{randomFilm.result.fullTitle}</p>
+        <p data-cy="fulltitle">{randomFilm.result.title}</p>
         <img
           src={randomFilm.result.image}
           alt=""
@@ -91,6 +118,22 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
     );
   };
 
+  const renderSaveButton = () => {
+    return (
+      <>
+        {saved === false ? (
+          <button type="submit" onClick={handleSave} data-cy="button">
+            Save For Later
+          </button>
+        ) : (
+          <button type="button" data-cy="button-disabled" disabled>
+            Saved
+          </button>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className="App">
       <div className="float:right;">
@@ -101,9 +144,12 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
         />
       </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
-      <button type="submit" onClick={handleSubmit} data-cy="button">
-        Film Roulette
-      </button>
+      <div>
+        <button type="submit" onClick={handleSubmit} data-cy="button">
+          Film Roulette
+        </button>
+        {renderFilm && inSession ? renderSaveButton() : false}
+      </div>
     </div>
   );
 };

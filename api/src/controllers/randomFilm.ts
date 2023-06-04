@@ -1,25 +1,44 @@
 import { Request, Response } from "express";
+import { getUserIdFromToken, findUserById } from "../helperFunctions";
 
 export const RandomFilmController = {
   Find: async (req: Request, res: Response) => {
-    interface Top250Films {
-      items: any[];
-    }
-
-    let top250Films: Top250Films = { items: [] };
-
     try {
-      let response: any = await fetch(
-        `https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`
-      );
+      const top250Films = await fetchTop250Films();
+      const randomFilm = getRandomFilm(top250Films.items);
 
-      top250Films = await response.json();
+      const token = req.cookies.token;
+      if (!token) {
+        return res.status(200).json({ result: randomFilm });
+      }
+
+      const userId = getUserIdFromToken(token);
+      const user = await findUserById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const saved = searchForSavedFilm(user.films, randomFilm.id);
+
+      return res.status(200).json({ result: randomFilm, saved });
     } catch (error) {
-      return res.status(500).json({ message: error });
+      return res.status(500).json({ message: "Failed to fetch random film" });
     }
-
-    const random: number = Math.floor(Math.random() * top250Films.items.length);
-
-    return res.status(200).json({ result: top250Films.items[random] });
   },
+};
+
+const fetchTop250Films = async () => {
+  const response = await fetch(
+    `https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`
+  );
+  return response.json();
+};
+
+const getRandomFilm = (films: any[]) => {
+  const random = Math.floor(Math.random() * films.length);
+  return films[random];
+};
+
+const searchForSavedFilm = (films: any[], filmId: string) => {
+  return films.some((film) => film.id === filmId);
 };
