@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-// import { Logout } from "../Auth/Logout";
+import { Logout } from "../Auth/Logout";
 
-// interface Saved {
-//   films: any[];
-// }
+interface Film {
+  result: {
+    id: string;
+    rank: string;
+    title: string;
+    fullTitle: string;
+    year: string;
+    image: string;
+    crew: string;
+    imDbRating: string;
+    imDbRatingCount: string;
+  };
+}
+
+interface Saved {
+  films: Film[];
+}
 
 interface SavedFilmsProps {
   navigate: Function;
@@ -16,7 +30,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   setGlobalSession,
 }) => {
   const [inSession, setInSession] = useState<boolean>(false);
-  const [saved, setSaved] = useState<any[]>([]);
+  const [saved, setSaved] = useState<Saved>({ films: [] });
 
   useEffect(() => {
     const validateToken = async () => {
@@ -37,7 +51,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
       try {
         const response = await fetch("/users/films");
         const responseData = await response.json();
-        setSaved(responseData.films);
+        setSaved(responseData);
       } catch (error) {
         navigate("/");
         console.error(error);
@@ -48,13 +62,22 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
     fetchFilms();
   }, []);
 
-  const renderFilm = (): JSX.Element[] => {
-    return saved.map((film: any) => {
+  const renderFilms = (): JSX.Element[] => {
+    return saved.films.map((film: any) => {
       return <div key={film.id}>{film.title}</div>;
     });
   };
 
-  return <>{renderFilm()}</>;
+  return (
+    <>
+      <Logout
+        navigate={navigate}
+        inSession={inSession}
+        setInSession={setInSession}
+      />
+      <div>{renderFilms()}</div>
+    </>
+  );
 };
 
 export default SavedFilms;
