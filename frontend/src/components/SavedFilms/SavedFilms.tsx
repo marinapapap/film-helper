@@ -88,6 +88,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
         inSession={inSession}
         setInSession={setInSession}
       />
+
       <div className="film-grid">{renderFilms()}</div>
     </>
   );

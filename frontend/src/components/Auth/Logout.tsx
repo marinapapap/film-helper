@@ -31,7 +31,7 @@ export const Logout: React.FC<LogoutProps> = ({
 
   if (inSession) {
     return (
-      <div className="App">
+      <div className="auth-button">
         <button type="submit" onClick={handleSubmit} data-cy="logout-button">
           Logout
         </button>
@@ -39,7 +39,7 @@ export const Logout: React.FC<LogoutProps> = ({
     );
   } else {
     return (
-      <div className="App">
+      <div className="auth-button">
         <button type="submit" onClick={redirectToLogin} data-cy="login-button">
           Login
         </button>

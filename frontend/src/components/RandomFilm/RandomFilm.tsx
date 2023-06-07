@@ -122,11 +122,21 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
     return (
       <>
         {saved === false ? (
-          <button type="submit" onClick={handleSave} data-cy="button">
+          <button
+            className="button-52 a"
+            type="submit"
+            onClick={handleSave}
+            data-cy="button"
+          >
             Save For Later
           </button>
         ) : (
-          <button type="button" data-cy="button-disabled" disabled>
+          <button
+            className="button-52 b"
+            type="button"
+            data-cy="button-disabled"
+            disabled
+          >
             Saved
           </button>
         )}
@@ -145,10 +155,17 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
       </div>
       <div>{renderFilm === true ? showRandomFilm() : false}</div>
       <div>
-        <button type="submit" onClick={handleSubmit} data-cy="button">
-          Film Roulette
-        </button>
-        {renderFilm && inSession ? renderSaveButton() : false}
+        <div>
+          <button
+            className="button-53"
+            type="submit"
+            onClick={handleSubmit}
+            data-cy="button"
+          >
+            Film Roulette
+          </button>
+        </div>
+        <div>{renderFilm && inSession ? renderSaveButton() : false}</div>
       </div>
     </div>
   );
