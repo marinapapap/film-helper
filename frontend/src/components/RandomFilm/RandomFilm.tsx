@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css";
+import "./RandomFilm.css";
 import { Logout } from "../Auth/Logout";
 
 interface Film {
@@ -123,7 +123,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
       <>
         {saved === false ? (
           <button
-            className="button-52 a"
+            className="button-rf"
             type="submit"
             onClick={handleSave}
             data-cy="button"
@@ -132,7 +132,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
           </button>
         ) : (
           <button
-            className="button-52 b"
+            className="button-rf"
             type="button"
             data-cy="button-disabled"
             disabled
@@ -146,26 +146,28 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
 
   return (
     <div className="App">
-      <div className="float:right;">
+      <div>
         <Logout
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}
         />
       </div>
-      <div>{renderFilm === true ? showRandomFilm() : false}</div>
-      <div>
+
+      <div className="film-roulette">
+        <div>{renderFilm === true ? showRandomFilm() : false}</div>
         <div>
           <button
-            className="button-53"
+            className="button-rf"
             type="submit"
             onClick={handleSubmit}
             data-cy="button"
           >
             Film Roulette
           </button>
+          <span style={{ margin: "20px" }}></span>
+          {renderFilm && inSession ? renderSaveButton() : false}
         </div>
-        <div>{renderFilm && inSession ? renderSaveButton() : false}</div>
       </div>
     </div>
   );
