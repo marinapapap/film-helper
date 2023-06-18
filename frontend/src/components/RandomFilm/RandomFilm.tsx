@@ -103,16 +103,21 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   const showRandomFilm = (): JSX.Element => {
     return (
       <>
-        <p data-cy="fulltitle">{randomFilm.result.title}</p>
-        <img
-          src={randomFilm.result.image}
-          alt=""
-          data-cy="image"
-          width="300"
-          height="400"
-        ></img>
+        <h1 className="example" data-cy="fulltitle">
+          {randomFilm.result.title}
+        </h1>
         <p data-cy="crew">{randomFilm.result.crew}</p>
-        <p data-cy="rating">{randomFilm.result.imDbRating}/10</p>
+        <div>
+          <img
+            src={randomFilm.result.image}
+            alt=""
+            data-cy="image"
+            width="300"
+            height="400"
+          ></img>
+        </div>
+
+        {/* <p data-cy="rating">ImDb rating: {randomFilm.result.imDbRating}/10</p> */}
         <div></div>
       </>
     );
@@ -132,7 +137,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
           </button>
         ) : (
           <button
-            className="button-rf"
+            className="button-rf saved"
             type="button"
             data-cy="button-disabled"
             disabled
@@ -165,6 +170,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
           >
             Film Roulette
           </button>
+
           <span style={{ margin: "20px" }}></span>
           {renderFilm && inSession ? renderSaveButton() : false}
         </div>

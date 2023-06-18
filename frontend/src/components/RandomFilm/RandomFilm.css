@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background: #e8e8e8;
 }
 
 */ .auth-button {
@@ -18,15 +19,19 @@ body {
   text-align: center;
 }
 
+/* buttons */
+
 .button-rf {
   color: #090909;
-  padding: 0.7em 1.7em;
-  font-size: 18px;
   border-radius: 0.5em;
   background: #e8e8e8;
   border: 1px solid #e8e8e8;
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.button-rf.saved {
+  color: grey;
 }
 
 .button-rf:hover {
@@ -35,4 +40,63 @@ body {
 
 .button-rf:active {
   box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+}
+
+@media (max-width: 767px) {
+  .button-rf {
+    /* Styles for small screens/mobile devices */
+    font-size: 16px;
+    padding: 0.5em 1.5em;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .button-rf {
+    /* Styles for medium-sized screens */
+    font-size: 20px;
+    padding: 0.5em 1.5em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .button-rf {
+    /* Styles for larger screens/desktop */
+    font-size: 20px;
+    padding: 0.5em 1.5em;
+  }
+}
+
+/* film title */
+
+h1 {
+  color: #111;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 100px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+}
+
+@media (min-width: 601px) {
+  .example {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .example {
+    font-size: 30px;
+  }
+}
+
+/* film image */
+
+img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(10px 10px 10px grey);
 }
