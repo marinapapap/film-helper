@@ -4,6 +4,7 @@ import { RandomFilm } from "./components/RandomFilm/RandomFilm";
 import { LoginForm } from "./components/Auth/Login";
 import { SignupForm } from "./components/Signup/Signup";
 import { SavedFilms } from "./components/SavedFilms/SavedFilms";
+import "./App.css";
 
 const App = () => {
   const [globalSession, setGlobalSession] = useState<boolean>(false);

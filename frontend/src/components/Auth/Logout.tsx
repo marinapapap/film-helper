@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
+import "./Auth.css";
 
 interface LogoutProps {
   navigate: Function;
@@ -12,7 +13,9 @@ export const Logout: React.FC<LogoutProps> = ({
   inSession,
   setInSession,
 }) => {
-  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
+  const handleSubmit = async (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
 
     try {
@@ -29,21 +32,33 @@ export const Logout: React.FC<LogoutProps> = ({
     navigate("/login");
   };
 
-  if (inSession) {
-    return (
-      <div className="auth-button">
-        <button type="submit" onClick={handleSubmit} data-cy="logout-button">
-          Logout
-        </button>
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <div className="dropdown">
+      <div className="dropdown-container">
+        <span
+          className="material-symbols-outlined icon"
+          onClick={toggleDropdown}
+        >
+          movie
+        </span>
+        {isDropdownOpen && (
+          <div className="dropdown-content">
+            <div
+              onClick={inSession ? handleSubmit : redirectToLogin}
+              // onMouseEnter={() => setDropdownOpen(true)}
+              // onMouseLeave={() => setDropdownOpen(false)}
+              data-cy={inSession ? "logout-button" : "login-button"}
+            >
+              {inSession ? "Logout" : "Login"}
+            </div>
+            <div>Save Films</div>
+          </div>
+        )}
       </div>
-    );
-  } else {
-    return (
-      <div className="auth-button">
-        <button type="submit" onClick={redirectToLogin} data-cy="login-button">
-          Login
-        </button>
-      </div>
-    );
-  }
+    </div>
+  );
 };

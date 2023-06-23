@@ -90,9 +90,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
         setInSession={setInSession}
       />
       <div className="flexing">
-        <div className="margin-left"></div>
         <div className="film-grid">{renderFilms()}</div>
-        <div className="margin-right"></div>
       </div>
     </>
   );

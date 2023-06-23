@@ -1,0 +1,32 @@
+.icon {
+  transform: scale(2.5);
+}
+
+.dropdown {
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #f9f9f9;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  /* Add styling for dropdown content */
+}
+
+.dropdown-content button {
+  display: block;
+  margin-bottom: 8px;
+  /* Add styling for dropdown options */
+}
