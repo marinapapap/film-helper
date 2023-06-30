@@ -1,5 +1,6 @@
 .icon {
   transform: scale(2.5);
+  opacity: 60%;
 }
 
 .dropdown {
@@ -17,11 +18,14 @@
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: #f9f9f9;
+  background-color: #e8e8e8;
   padding: 8px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
+  margin-right: -8px;
+  white-space: nowrap;
+  text-align: right;
   /* Add styling for dropdown content */
 }
 

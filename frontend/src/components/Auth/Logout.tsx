@@ -55,7 +55,7 @@ export const Logout: React.FC<LogoutProps> = ({
             >
               {inSession ? "Logout" : "Login"}
             </div>
-            <div>Save Films</div>
+            <div>Watch List</div>
           </div>
         )}
       </div>
