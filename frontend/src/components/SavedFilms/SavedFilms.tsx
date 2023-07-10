@@ -84,13 +84,15 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
 
   return (
     <>
-      <Logout
-        navigate={navigate}
-        inSession={inSession}
-        setInSession={setInSession}
-      />
-      <div className="flexing">
-        <div className="film-grid">{renderFilms()}</div>
+      <div className="box">
+        <Logout
+          navigate={navigate}
+          inSession={inSession}
+          setInSession={setInSession}
+        />
+        <div className="flexing">
+          <div className="film-grid">{renderFilms()}</div>
+        </div>
       </div>
     </>
   );

@@ -36,6 +36,12 @@ export const Logout: React.FC<LogoutProps> = ({
     setDropdownOpen(!isDropdownOpen);
   };
 
+  const redirectToList = async (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+
+    navigate("/savedFilms");
+  };
+
   return (
     <div className="dropdown">
       <div className="dropdown-container">
@@ -55,7 +61,7 @@ export const Logout: React.FC<LogoutProps> = ({
             >
               {inSession ? "Logout" : "Login"}
             </div>
-            <div>Watch List</div>
+            <div onClick={redirectToList}>Watch List</div>
           </div>
         )}
       </div>

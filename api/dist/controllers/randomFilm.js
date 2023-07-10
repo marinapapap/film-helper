@@ -29,6 +29,7 @@ exports.RandomFilmController = {
             return res.status(200).json({ result: randomFilm, saved });
         }
         catch (error) {
+            console.log(error);
             return res.status(500).json({ message: "Failed to fetch random film" });
         }
     }),
