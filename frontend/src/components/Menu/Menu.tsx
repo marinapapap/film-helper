@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import "./Menu.css";
 
@@ -16,7 +16,6 @@ export const Menu: React.FC<MenuProps> = ({
   isHomepage,
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -35,12 +34,8 @@ export const Menu: React.FC<MenuProps> = ({
     navigate("/login");
   };
 
-  const handleMouseEnter = () => {
-    setDropdownOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setDropdownOpen(false);
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
   };
 
   const redirectToHomepage = async (
@@ -66,21 +61,16 @@ export const Menu: React.FC<MenuProps> = ({
   };
 
   return (
-    <div className="dropdown" ref={dropdownRef}>
+    <div className="dropdown">
       <div className="dropdown-container">
         <span
           className="material-symbols-outlined icon"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onClick={toggleDropdown}
         >
           movie
         </span>
         {isDropdownOpen && (
-          <div
-            className="dropdown-content"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="dropdown-content">
             <div
               onClick={inSession ? handleSubmit : redirectToLogin}
               data-cy={inSession ? "logout-button" : "login-button"}
