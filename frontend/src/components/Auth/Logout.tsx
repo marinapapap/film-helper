@@ -47,7 +47,8 @@ export const Logout: React.FC<LogoutProps> = ({
       <div className="dropdown-container">
         <span
           className="material-symbols-outlined icon"
-          onClick={toggleDropdown}
+          onMouseEnter={toggleDropdown}
+          onMouseLeave={toggleDropdown}
         >
           movie
         </span>
@@ -55,8 +56,6 @@ export const Logout: React.FC<LogoutProps> = ({
           <div className="dropdown-content">
             <div
               onClick={inSession ? handleSubmit : redirectToLogin}
-              // onMouseEnter={() => setDropdownOpen(true)}
-              // onMouseLeave={() => setDropdownOpen(false)}
               data-cy={inSession ? "logout-button" : "login-button"}
             >
               {inSession ? "Logout" : "Login"}
