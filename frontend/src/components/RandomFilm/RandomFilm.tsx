@@ -41,6 +41,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   const [renderFilm, setRenderFilm] = useState<boolean>(false);
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
+  const [isHomepage] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,6 +157,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}
+          isHomepage={isHomepage}
         />
       </div>
 

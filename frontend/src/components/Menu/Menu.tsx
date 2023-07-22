@@ -6,12 +6,14 @@ interface MenuProps {
   navigate: Function;
   inSession: boolean;
   setInSession: Function;
+  isHomepage: boolean;
 }
 
 export const Menu: React.FC<MenuProps> = ({
   navigate,
   inSession,
   setInSession,
+  isHomepage,
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -37,21 +39,30 @@ export const Menu: React.FC<MenuProps> = ({
     setDropdownOpen(true);
   };
 
-  const handleMouseLeave = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  const handleMouseLeave = () => {
+    setDropdownOpen(false);
+  };
+
+  const redirectToHomepage = async (
+    event: React.MouseEvent<HTMLDivElement>
   ) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.relatedTarget as Node)
-    ) {
-      setDropdownOpen(false);
-    }
+    event.preventDefault();
+
+    navigate("/");
   };
 
   const redirectToList = async (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
 
     navigate("/savedFilms");
+  };
+
+  const switchPageLink = () => {
+    if (isHomepage) {
+      return <div onClick={redirectToList}>Watch List</div>;
+    } else {
+      return <div onClick={redirectToHomepage}>Find Film</div>;
+    }
   };
 
   return (
@@ -76,7 +87,7 @@ export const Menu: React.FC<MenuProps> = ({
             >
               {inSession ? "Logout" : "Login"}
             </div>
-            <div onClick={redirectToList}>Watch List</div>
+            {switchPageLink()}
           </div>
         )}
       </div>

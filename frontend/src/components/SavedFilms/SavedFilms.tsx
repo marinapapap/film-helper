@@ -31,6 +31,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
 }) => {
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
+  const [isHomepage] = useState<boolean>(false);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -89,6 +90,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}
+          isHomepage={isHomepage}
         />
         <div className="flexing">
           <div className="film-grid">{renderFilms()}</div>
