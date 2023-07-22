@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./SavedFilms.css";
-import { Logout } from "../Auth/Logout";
+import { Menu } from "../Menu/Menu";
 
 interface Film {
   result: {
@@ -85,7 +85,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   return (
     <>
       <div className="box">
-        <Logout
+        <Menu
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}

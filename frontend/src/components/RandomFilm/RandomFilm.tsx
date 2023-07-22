@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./RandomFilm.css";
-import { Logout } from "../Auth/Logout";
+import { Menu } from "../Menu/Menu";
 
 interface Film {
   result: {
@@ -152,7 +152,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
   return (
     <div className="App">
       <div>
-        <Logout
+        <Menu
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}

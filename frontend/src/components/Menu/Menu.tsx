@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../../App.css";
-import "./Auth.css";
+import "./Menu.css";
 
-interface LogoutProps {
+interface MenuProps {
   navigate: Function;
   inSession: boolean;
   setInSession: Function;
 }
 
-export const Logout: React.FC<LogoutProps> = ({
+export const Menu: React.FC<MenuProps> = ({
   navigate,
   inSession,
   setInSession,
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -32,8 +33,19 @@ export const Logout: React.FC<LogoutProps> = ({
     navigate("/login");
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+  const handleMouseEnter = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.relatedTarget as Node)
+    ) {
+      setDropdownOpen(false);
+    }
   };
 
   const redirectToList = async (event: React.MouseEvent<HTMLDivElement>) => {
@@ -43,17 +55,21 @@ export const Logout: React.FC<LogoutProps> = ({
   };
 
   return (
-    <div className="dropdown">
+    <div className="dropdown" ref={dropdownRef}>
       <div className="dropdown-container">
         <span
           className="material-symbols-outlined icon"
-          onMouseEnter={toggleDropdown}
-          onMouseLeave={toggleDropdown}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           movie
         </span>
         {isDropdownOpen && (
-          <div className="dropdown-content">
+          <div
+            className="dropdown-content"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <div
               onClick={inSession ? handleSubmit : redirectToLogin}
               data-cy={inSession ? "logout-button" : "login-button"}
