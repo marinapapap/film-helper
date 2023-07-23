@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 
 interface SignupFormProps {
@@ -9,6 +9,22 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  useEffect(() => {
+    const validateToken = async () => {
+      try {
+        const response = await fetch("/tokens/validate");
+        const responseData = await response.json();
+        if (responseData.session) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    validateToken();
+  }, []);
 
   const handleChange = (setFunction: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
