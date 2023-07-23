@@ -50,7 +50,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
 
       if (response.status !== 201) {
       } else {
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       console.error(error);
