@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { RandomFilm } from "./components/RandomFilm/RandomFilm";
-import { LoginForm } from "./components/Auth/Login";
+import { LoginForm } from "./components/Login/Login";
 import { SignupForm } from "./components/Signup/Signup";
 import { SavedFilms } from "./components/SavedFilms/SavedFilms";
 import "./App.css";

@@ -92,6 +92,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
           />
         </div>
       </form>
+      <p>
+        Already have an account? Login <a href="/login">here</a>
+      </p>
     </div>
   );
 };

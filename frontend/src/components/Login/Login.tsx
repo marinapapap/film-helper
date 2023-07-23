@@ -79,6 +79,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
       </form>
+      <p>
+        Need an account? Signup <a href="/signup">here</a>
+      </p>
     </div>
   );
 };
