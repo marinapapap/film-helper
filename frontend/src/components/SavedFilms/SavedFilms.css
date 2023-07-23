@@ -31,7 +31,7 @@
   margin-bottom: 20px;
 }
 
-.flexing {
+.flex-container {
   display: flex;
   flex-wrap: wrap; /* Allow flex items to wrap to the next line */
   justify-content: center; /* Horizontally center flex items */
@@ -48,4 +48,21 @@
   .flex-item {
     flex-basis: 100%; /* Set flex basis to 100% to make flex items full width on small screens */
   }
+}
+
+.delete-button {
+  color: #090909;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.delete-button:hover {
+  border: 1px solid white;
+}
+
+.delete-button:active {
+  box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
 }

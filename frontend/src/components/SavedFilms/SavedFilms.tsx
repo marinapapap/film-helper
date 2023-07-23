@@ -66,18 +66,21 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   const renderFilms = (): JSX.Element[] => {
     return saved.films.map((film: any, index: number) => {
       return (
-        <div className="flex-item">
-          <div className="title" key={`fullTitle${index + 1}`}>
-            {film.fullTitle}
+        <div>
+          <div className="flex-item">
+            <div className="title" key={`fullTitle${index + 1}`}>
+              {film.fullTitle}
+            </div>
+            <p>ImDb rating: {film.imDbRating}/10</p>
+            <img
+              src={film.image}
+              alt=""
+              key={`image${index + 1}`}
+              width="300"
+              height="400"
+            ></img>
+            <button className="delete-button">Delete</button>
           </div>
-          <p>ImDb rating: {film.imDbRating}/10</p>
-          <img
-            src={film.image}
-            alt=""
-            key={`image${index + 1}`}
-            width="300"
-            height="400"
-          ></img>
         </div>
       );
     });
@@ -92,7 +95,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
           setInSession={setInSession}
           isHomepage={isHomepage}
         />
-        <div className="flexing">
+        <div className="flex-container">
           <div className="film-grid">{renderFilms()}</div>
         </div>
       </div>
