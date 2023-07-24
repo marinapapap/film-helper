@@ -16,7 +16,9 @@ exports.app.use(express_1.default.json());
 const randomFilm_1 = __importDefault(require("./routes/randomFilm"));
 const users_1 = __importDefault(require("./routes/users"));
 const tokens_1 = __importDefault(require("./routes/tokens"));
+const savedFilms_1 = __importDefault(require("./routes/savedFilms"));
 // routes
 exports.app.use("/randomFilm", randomFilm_1.default);
 exports.app.use("/users", users_1.default);
 exports.app.use("/tokens", tokens_1.default);
+exports.app.use("/savedFilms", savedFilms_1.default);

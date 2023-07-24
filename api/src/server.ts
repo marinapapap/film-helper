@@ -14,9 +14,11 @@ app.use(express.json());
 import randomFilmRouter from "./routes/randomFilm";
 import userRouter from "./routes/users";
 import tokensRouter from "./routes/tokens";
+import savedFilmsRouter from "./routes/savedFilms";
 
 // routes
 
 app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);
+app.use("/savedFilms", savedFilmsRouter);

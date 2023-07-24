@@ -32,6 +32,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
   const [isHomepage] = useState<boolean>(false);
+  // const [filmIndex, setFilmIndex] = useState<number>(0);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -63,8 +64,25 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
     fetchFilms();
   }, []);
 
+  const deleteFilm = async () => {
+    try {
+      await fetch("/savedFilms/film", {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          filmIndex: 0,
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const renderFilms = (): JSX.Element[] => {
     return saved.films.map((film: any, index: number) => {
+      // setFilmIndex(index);
       return (
         <div>
           <div className="flex-item">
@@ -79,7 +97,13 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
               width="300"
               height="400"
             ></img>
-            <button className="delete-button">Delete</button>
+            <button
+              className="delete-button"
+              type="submit"
+              onClick={deleteFilm}
+            >
+              Delete
+            </button>
           </div>
         </div>
       );
