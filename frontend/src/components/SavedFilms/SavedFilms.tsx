@@ -32,7 +32,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
   const [isHomepage] = useState<boolean>(false);
-  // const [filmIndex, setFilmIndex] = useState<number>(0);
+  const [filmIndex, setFilmIndex] = useState<number>(0);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -64,7 +64,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
     fetchFilms();
   }, []);
 
-  const deleteFilm = async () => {
+  const deleteFilm = async (index: number) => {
     try {
       await fetch("/savedFilms/film", {
         method: "delete",
@@ -72,7 +72,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          filmIndex: 0,
+          filmIndex: index,
         }),
       });
     } catch (error) {
@@ -100,7 +100,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
             <button
               className="delete-button"
               type="submit"
-              onClick={deleteFilm}
+              onClick={() => deleteFilm(index)}
             >
               Delete
             </button>
