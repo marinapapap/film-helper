@@ -81,7 +81,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
     event.preventDefault();
 
     try {
-      const response = await fetch("/users/films", {
+      const response = await fetch("/savedFilms/films", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

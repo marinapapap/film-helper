@@ -32,7 +32,6 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
   const [isHomepage] = useState<boolean>(false);
-  const [filmIndex, setFilmIndex] = useState<number>(0);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -49,9 +48,13 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
       }
     };
 
+    validateToken();
+  }, []);
+
+  useEffect(() => {
     const fetchFilms = async () => {
       try {
-        const response = await fetch("/users/films");
+        const response = await fetch("/savedFilms/films");
         const responseData = await response.json();
         setSaved(responseData);
       } catch (error) {
@@ -60,9 +63,8 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
       }
     };
 
-    validateToken();
     fetchFilms();
-  }, []);
+  }, [saved.films]);
 
   const deleteFilm = async (index: number) => {
     try {
@@ -82,7 +84,6 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
 
   const renderFilms = (): JSX.Element[] => {
     return saved.films.map((film: any, index: number) => {
-      // setFilmIndex(index);
       return (
         <div>
           <div className="flex-item">

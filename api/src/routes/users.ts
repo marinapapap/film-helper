@@ -9,8 +9,5 @@ router.use((req, res, next) => {
 });
 
 router.post("/", UsersController.Create);
-router.post("/films", UsersController.SaveFilm);
-router.get("/films", UsersController.GetFilms);
-// router.delete("/film", UsersController.RemoveFilm);
 
 export default router;
