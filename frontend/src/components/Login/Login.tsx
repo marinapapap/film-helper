@@ -3,13 +3,9 @@ import "../../App.css";
 
 interface LoginFormProps {
   navigate: Function;
-  setGlobalSession: Function;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({
-  navigate,
-  setGlobalSession,
-}) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -49,7 +45,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
       if (response.status !== 201) {
       } else {
-        setGlobalSession(true);
         navigate("/");
       }
     } catch (error) {

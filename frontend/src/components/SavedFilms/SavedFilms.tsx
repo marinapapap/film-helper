@@ -22,16 +22,13 @@ interface Saved {
 
 interface SavedFilmsProps {
   navigate: Function;
-  setGlobalSession: Function;
 }
 
-export const SavedFilms: React.FC<SavedFilmsProps> = ({
-  navigate,
-  setGlobalSession,
-}) => {
+export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
   const [isHomepage] = useState<boolean>(false);
+  const [isFetched, setIsFetched] = useState<boolean>(false);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -41,30 +38,32 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
         if (!responseData.session) {
           navigate("/");
         }
+
         setInSession(true);
       } catch (error) {
         navigate("/");
         console.error(error);
       }
     };
-
     validateToken();
   }, []);
 
   useEffect(() => {
-    const fetchFilms = async () => {
-      try {
-        const response = await fetch("/savedFilms/films");
-        const responseData = await response.json();
-        setSaved(responseData);
-      } catch (error) {
-        navigate("/");
-        console.error(error);
-      }
-    };
-
     fetchFilms();
+    noFilmsSavedNotice();
   }, [saved.films]);
+
+  const fetchFilms = async () => {
+    try {
+      const response = await fetch("/savedFilms/films");
+      const responseData = await response.json();
+      setSaved(responseData);
+      setIsFetched(true);
+    } catch (error) {
+      navigate("/");
+      console.error(error);
+    }
+  };
 
   const deleteFilm = async (index: number) => {
     try {
@@ -111,6 +110,20 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
     });
   };
 
+  const noFilmsSavedNotice = () => {
+    if (isFetched && !saved.films.length) {
+      return (
+        <div>
+          Save films to curate your personal watch list. Be warned, you only
+          have 10 slots to fill before it's time to actually start watching the
+          films!
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       <div className="box">
@@ -124,6 +137,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({
           <div className="film-grid">{renderFilms()}</div>
         </div>
       </div>
+      {noFilmsSavedNotice()}
     </>
   );
 };

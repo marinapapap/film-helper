@@ -18,13 +18,9 @@ interface Film {
 
 interface RandomFilmProps {
   navigate: Function;
-  setGlobalSession: Function;
 }
 
-export const RandomFilm: React.FC<RandomFilmProps> = ({
-  navigate,
-  setGlobalSession,
-}) => {
+export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [randomFilm, setRandomFilm] = useState<Film>({
     result: {
       id: "",
@@ -51,7 +47,6 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({
 
         if (responseData.session === true) {
           setInSession(true);
-          setGlobalSession(true);
         }
       } catch (error) {
         setInSession(false);

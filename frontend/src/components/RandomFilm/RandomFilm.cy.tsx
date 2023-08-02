@@ -5,9 +5,7 @@ const setGlobalSession = () => {};
 
 describe("RandomFilm", () => {
   beforeEach(() => {
-    cy.mount(
-      <RandomFilm navigate={navigate} setGlobalSession={setGlobalSession} />
-    );
+    cy.mount(<RandomFilm navigate={navigate} />);
   });
 
   it("renders button", () => {

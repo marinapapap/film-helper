@@ -5,9 +5,7 @@ const setGlobalSession = () => {};
 
 describe("Login", () => {
   beforeEach(() => {
-    cy.mount(
-      <LoginForm navigate={navigate} setGlobalSession={setGlobalSession} />
-    );
+    cy.mount(<LoginForm navigate={navigate} />);
   });
 
   it("renders email field", () => {
