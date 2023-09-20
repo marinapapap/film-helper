@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./RandomFilm.css";
-import "./Spinner.css";
 import { Menu } from "../Menu/Menu";
-import Spinner from "react-bootstrap/Spinner";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 interface Film {
   result: {
@@ -105,16 +104,6 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     }
   };
 
-  const growExample = () => {
-    return (
-      <div className="spinner">
-        <div className="spinner-content">
-          <Spinner animation="grow" />
-        </div>
-      </div>
-    );
-  };
-
   const showRandomFilm = (): JSX.Element => {
     return (
       <>
@@ -131,8 +120,6 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
             height="400"
           ></img>
         </div>
-
-        {/* <p data-cy="rating">ImDb rating: {randomFilm.result.imDbRating}/10</p> */}
         <div></div>
       </>
     );
@@ -175,7 +162,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
         />
       </div>
 
-      <div>{isLoading ? growExample() : null}</div>
+      <LoadingSpinner isLoading={isLoading} />
 
       <div className="film-roulette">
         <div>{renderFilm === true ? showRandomFilm() : false}</div>
