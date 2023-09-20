@@ -39,8 +39,11 @@
 }
 
 .flex-item {
+  display: flex;
+  flex-direction: column; /* Stack content and button vertically */
+  align-items: center; /* Center content and button horizontally */
   flex: 1 0 200px; /* Flex item will grow, won't shrink, and has a basis of 200px */
-  margin: 50px; /* Add margin between flex items */
+  margin: 50px;
   text-align: center;
 }
 
