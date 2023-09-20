@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./RandomFilm.css";
+import "./Spinner.css";
 import { Menu } from "../Menu/Menu";
+import Spinner from "react-bootstrap/Spinner";
 
 interface Film {
   result: {
@@ -38,6 +40,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
   const [isHomepage] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,12 +64,18 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     event.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await fetch("/randomFilm");
       const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
+
       setSaved(data.saved);
       console.log(data);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     } catch (error) {
       console.error(error);
     }
@@ -94,6 +103,16 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       setSaved(false);
       console.error(error);
     }
+  };
+
+  const growExample = () => {
+    return (
+      <div className="spinner">
+        <div className="spinner-content">
+          <Spinner animation="grow" />
+        </div>
+      </div>
+    );
   };
 
   const showRandomFilm = (): JSX.Element => {
@@ -155,6 +174,8 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
           isHomepage={isHomepage}
         />
       </div>
+
+      <div>{isLoading ? growExample() : null}</div>
 
       <div className="film-roulette">
         <div>{renderFilm === true ? showRandomFilm() : false}</div>
