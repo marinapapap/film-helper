@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./RandomFilm.css";
 import { Menu } from "../Menu/Menu";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import Modal from "react-modal";
 
 interface Film {
   result: {
@@ -20,6 +21,23 @@ interface Film {
 interface RandomFilmProps {
   navigate: Function;
 }
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    color: "#090909",
+    borderRadius: "0.5em",
+    background: "#e8e8e8",
+    border: "1px solid #e8e8e8",
+    transition: "all 0.3s",
+    boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff",
+  },
+};
 
 export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [randomFilm, setRandomFilm] = useState<Film>({
@@ -40,6 +58,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [saved, setSaved] = useState<boolean>(false);
   const [isHomepage] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,13 +115,27 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
         }),
       });
 
+      if (response.status === 403) {
+        openModal();
+      }
+
       const data = (await response.json()) as any;
+      console.log(data.status);
+
       data.message === "OK" ? setSaved(true) : setSaved(false);
     } catch (error) {
       setSaved(false);
       console.error(error);
     }
   };
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const showRandomFilm = (): JSX.Element => {
     return (
@@ -161,6 +194,29 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
           isHomepage={isHomepage}
         />
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <button
+          onClick={closeModal}
+          style={{
+            color: "#090909",
+            borderRadius: "0.5em",
+            background: "#e8e8e8",
+            border: "1px solid #e8e8e8",
+            transition: "all 0.3s",
+            boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff",
+          }}
+        >
+          x
+        </button>
+
+        <div>You have reached the save limit</div>
+      </Modal>
 
       <LoadingSpinner isLoading={isLoading} />
 
