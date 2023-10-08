@@ -28,6 +28,12 @@ exports.RandomFilmController = {
                 return res.status(404).json({ message: "User not found" });
             }
             const filmData = Object.assign({}, film);
+            if (user.films.length === 10) {
+                return res.status(403).json({
+                    error: "Limit Reached",
+                    message: "You have reached the limit for saved films",
+                });
+            }
             user.films.push(filmData);
             yield user.save();
             return res.status(201).json({ user, message: "OK" });

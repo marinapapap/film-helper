@@ -22,6 +22,12 @@ export const RandomFilmController = {
       }
 
       const filmData: IFilm = { ...film };
+      if (user.films.length === 10) {
+        return res.status(403).json({
+          error: "Limit Reached",
+          message: "You have reached the limit for saved films",
+        });
+      }
       user.films.push(filmData);
       await user.save();
 

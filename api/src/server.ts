@@ -28,7 +28,8 @@ import savedFilmsRouter from "./routes/savedFilms";
 
 // routes
 
-app.use("/randomFilm", apiLimiter, randomFilmRouter);
+// app.use("/randomFilm", apiLimiter, randomFilmRouter);
+app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);
 app.use("/savedFilms", savedFilmsRouter);

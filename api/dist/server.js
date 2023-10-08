@@ -26,7 +26,8 @@ const users_1 = __importDefault(require("./routes/users"));
 const tokens_1 = __importDefault(require("./routes/tokens"));
 const savedFilms_1 = __importDefault(require("./routes/savedFilms"));
 // routes
-exports.app.use("/randomFilm", apiLimiter, randomFilm_1.default);
+// app.use("/randomFilm", apiLimiter, randomFilmRouter);
+exports.app.use("/randomFilm", randomFilm_1.default);
 exports.app.use("/users", users_1.default);
 exports.app.use("/tokens", tokens_1.default);
 exports.app.use("/savedFilms", savedFilms_1.default);

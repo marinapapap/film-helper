@@ -85,8 +85,8 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
     return saved.films.map((film: any, index: number) => {
       return (
         <div>
-          <div className="flex-item">
-            <div className="title" key={`fullTitle${index + 1}`}>
+          <div className="film">
+            <div className="film-title" key={`fullTitle${index + 1}`}>
               {film.fullTitle}
             </div>
             <p>ImDb rating: {film.imDbRating}/10</p>
@@ -113,10 +113,12 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   const noFilmsSavedNotice = () => {
     if (isFetched && !saved.films.length) {
       return (
-        <div>
-          Save films to curate your personal watch list. Be warned, you only
-          have 10 slots to fill before it's time to actually start watching the
-          films!
+        <div className="saved-msg">
+          <p>Save films to curate your personal watch list here.</p>
+          <p>
+            You only have 10 slots to fill before it's time to actually start
+            watching them!
+          </p>
         </div>
       );
     } else {
@@ -126,14 +128,14 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
 
   return (
     <>
-      <div className="box">
+      <div className="content">
         <Menu
           navigate={navigate}
           inSession={inSession}
           setInSession={setInSession}
           isHomepage={isHomepage}
         />
-        <div className="flex-container">
+        <div className="film-content">
           <div className="film-grid">{renderFilms()}</div>
         </div>
       </div>
