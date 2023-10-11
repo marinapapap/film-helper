@@ -40,7 +40,10 @@ const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({
     dropDups: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
   } as any,
-  password: { type: String, required: true } as any,
+  password: {
+    type: String,
+    required: true,
+  } as any,
   films: [FilmSchema],
 });
 

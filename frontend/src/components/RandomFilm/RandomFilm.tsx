@@ -206,16 +206,14 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
           style={{
             color: "#090909",
             borderRadius: "0.5em",
-            background: "#e8e8e8",
             border: "1px solid #e8e8e8",
             transition: "all 0.3s",
-            boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff",
           }}
         >
           x
         </button>
 
-        <div>You have reached the save limit</div>
+        <div className="limit-msg">You have reached the save limit</div>
       </Modal>
 
       <LoadingSpinner isLoading={isLoading} />

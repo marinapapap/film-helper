@@ -96,3 +96,13 @@ img {
   filter: drop-shadow(10px 10px 10px grey);
   margin-bottom: 30px;
 }
+
+.limit-msg {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  color: #111;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.7;
+}

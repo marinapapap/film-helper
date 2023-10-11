@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { generateToken } from "../models/tokenGenerator";
 import JWT from "jsonwebtoken";
 import { User } from "../models/user";
+import * as bcrypt from "bcrypt";
 
 export const TokensController = {
   Create: async (req: Request, res: Response) => {
@@ -13,7 +14,8 @@ export const TokensController = {
       return res.status(401).json({ message: "auth error" });
     }
 
-    if (user.password === password) {
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (passwordMatch) {
       const token = await generateToken(user.id);
       return res
         .status(201)
