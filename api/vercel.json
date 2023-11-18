@@ -1,0 +1,9 @@
+{
+  "builds": [
+    {
+      "src": "./dist/**/*.js",
+      "use": "@now/node"
+    }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
