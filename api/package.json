@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx jest --runInBand --coverage",
     "build": "npx tsc -w",
+    "vercel-build": "true",
     "start": "npx nodemon ./bin/www"
   },
   "keywords": [],

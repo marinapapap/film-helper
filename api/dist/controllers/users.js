@@ -40,8 +40,6 @@ exports.UsersController = {
         try {
             const salt = yield bcrypt.genSalt(10);
             const hashedPassword = yield bcrypt.hash(req.body.password, salt);
-            console.log(req.body.password);
-            console.log(hashedPassword);
             const user = new user_1.User({
                 username: req.body.username,
                 password: hashedPassword,
