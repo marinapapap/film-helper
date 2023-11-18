@@ -2,7 +2,7 @@
   "builds": [
     {
       "src": "./dist/**/*.js",
-      "use": "@now/node"
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
