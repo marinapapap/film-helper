@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "npx jest --runInBand --coverage",
-    "build": "npx tsc -w",
-    "vercel-build": "npx tsc",
+    "watch": "npx tsc -w",
+    "build": "npx tsc",
     "start": "npx nodemon ./bin/www"
   },
   "keywords": [],

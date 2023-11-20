@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 
 config({ path: "./config.env" });
 
-export const app: Express = express();
+const app: Express = express();
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -29,11 +29,9 @@ import savedFilmsRouter from "./routes/savedFilms";
 // routes
 
 // app.use("/randomFilm", apiLimiter, randomFilmRouter);
-app.use("/", (req: Request, res: Response) => {
-  console.log("Logging message to browser");
-  res.send("Log message sent to browser!");
-});
 app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);
 app.use("/savedFilms", savedFilmsRouter);
+
+export default app;

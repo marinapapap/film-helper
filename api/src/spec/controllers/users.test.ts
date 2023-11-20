@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../../server";
+import app from "../../server";
 import fetch from "jest-fetch-mock";
 
 require("../mongodb_helper");

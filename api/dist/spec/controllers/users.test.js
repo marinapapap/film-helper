@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
-const server_1 = require("../../server");
+const server_1 = __importDefault(require("../../server"));
 const jest_fetch_mock_1 = __importDefault(require("jest-fetch-mock"));
 require("../mongodb_helper");
 require("jest-fetch-mock").enableMocks();
@@ -27,7 +27,7 @@ describe("RandomFilmController", () => {
         yield user_1.User.deleteMany({});
     }));
     it("gives response code 201", () => __awaiter(void 0, void 0, void 0, function* () {
-        let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
+        let response = yield (0, supertest_1.default)(server_1.default).post("/users").send({
             username: "film-expert",
             email: "test@email.com",
             password: "password",
@@ -35,7 +35,7 @@ describe("RandomFilmController", () => {
         expect(response.status).toBe(201);
     }));
     it("can create a user", () => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, supertest_1.default)(server_1.app).post("/users").send({
+        yield (0, supertest_1.default)(server_1.default).post("/users").send({
             username: "film-expert",
             email: "test@email.com",
             password: "password",
@@ -46,13 +46,13 @@ describe("RandomFilmController", () => {
     }));
     describe("when password NOT provided", () => {
         it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
-            let response = yield (0, supertest_1.default)(server_1.app)
+            let response = yield (0, supertest_1.default)(server_1.default)
                 .post("/users")
                 .send({ username: "film-expert", email: "test@email.com" });
             expect(response.status).toBe(400);
         }));
         it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, supertest_1.default)(server_1.app)
+            yield (0, supertest_1.default)(server_1.default)
                 .post("/users")
                 .send({ username: "film-expert", email: "test@email.com" });
             let users = yield user_1.User.find();
@@ -61,13 +61,13 @@ describe("RandomFilmController", () => {
     });
     describe("when email NOT provided", () => {
         it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
-            let response = yield (0, supertest_1.default)(server_1.app)
+            let response = yield (0, supertest_1.default)(server_1.default)
                 .post("/users")
                 .send({ username: "film-expert", password: "password" });
             expect(response.status).toBe(400);
         }));
         it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, supertest_1.default)(server_1.app)
+            yield (0, supertest_1.default)(server_1.default)
                 .post("/users")
                 .send({ username: "film-expert", password: "password" });
             let users = yield user_1.User.find();
@@ -76,7 +76,7 @@ describe("RandomFilmController", () => {
     });
     describe("when email is invalid", () => {
         it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
-            let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
+            let response = yield (0, supertest_1.default)(server_1.default).post("/users").send({
                 username: "film-expert",
                 email: "testemail.com",
                 password: "password",
@@ -84,7 +84,7 @@ describe("RandomFilmController", () => {
             expect(response.status).toBe(400);
         }));
         it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, supertest_1.default)(server_1.app).post("/users").send({
+            yield (0, supertest_1.default)(server_1.default).post("/users").send({
                 username: "film-expert",
                 email: "testemail.com",
                 password: "password",
@@ -102,7 +102,7 @@ describe("RandomFilmController", () => {
             });
         }));
         it("gives response code 400", () => __awaiter(void 0, void 0, void 0, function* () {
-            let response = yield (0, supertest_1.default)(server_1.app).post("/users").send({
+            let response = yield (0, supertest_1.default)(server_1.default).post("/users").send({
                 username: "film-expert",
                 email: "test@email.com",
                 password: "password2",
@@ -110,7 +110,7 @@ describe("RandomFilmController", () => {
             expect(response.status).toBe(400);
         }));
         it("does not NOT create a user", () => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, supertest_1.default)(server_1.app).post("/users").send({
+            yield (0, supertest_1.default)(server_1.default).post("/users").send({
                 username: "film-expert",
                 email: "test@email.com",
                 password: "password2",
