@@ -6,7 +6,7 @@
 
 require("dotenv").config();
 
-var app = require("../dist/server").default;
+var app = require("../dist/server").app;
 var debug = require("debug")("filmfinder:server");
 var http = require("http");
 var mongoose = require("mongoose");
