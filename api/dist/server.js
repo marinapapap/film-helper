@@ -27,6 +27,10 @@ const tokens_1 = __importDefault(require("./routes/tokens"));
 const savedFilms_1 = __importDefault(require("./routes/savedFilms"));
 // routes
 // app.use("/randomFilm", apiLimiter, randomFilmRouter);
+exports.app.use("/", (req, res) => {
+    console.log("Logging message to browser");
+    res.send("Log message sent to browser!");
+});
 exports.app.use("/randomFilm", randomFilm_1.default);
 exports.app.use("/users", users_1.default);
 exports.app.use("/tokens", tokens_1.default);

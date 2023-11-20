@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
@@ -29,6 +29,10 @@ import savedFilmsRouter from "./routes/savedFilms";
 // routes
 
 // app.use("/randomFilm", apiLimiter, randomFilmRouter);
+app.use("/", (req: Request, res: Response) => {
+  console.log("Logging message to browser");
+  res.send("Log message sent to browser!");
+});
 app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);
