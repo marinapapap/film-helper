@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 
 config({ path: "./config.env" });
 
-export const app: Express = express();
+const app: Express = express();
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -33,3 +33,5 @@ app.use("/randomFilm", randomFilmRouter);
 app.use("/users", userRouter);
 app.use("/tokens", tokensRouter);
 app.use("/savedFilms", savedFilmsRouter);
+
+export default app;
