@@ -5,8 +5,8 @@
 
 .film-content {
   display: flex;
-  flex-wrap: wrap; /* Allow flex items to wrap to the next line */
-  justify-content: center; /* Horizontally center flex items */
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
 }
 
@@ -17,13 +17,13 @@
 
 @media (max-width: 767px) {
   .film-grid {
-    grid-template-columns: 1fr; /* Single column */
+    grid-template-columns: 1fr;
   }
 }
 
 @media (min-width: 768px) {
   .film-grid {
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -40,16 +40,16 @@
 
 .film {
   display: flex;
-  flex-direction: column; /* Stack content and button vertically */
-  align-items: center; /* Center content and button horizontally */
-  flex: 1 0 200px; /* Flex item will grow, won't shrink, and has a basis of 200px */
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 200px;
   margin: 50px;
   text-align: center;
 }
 
 @media (max-width: 767px) {
   .flex-item {
-    flex-basis: 100%; /* Set flex basis to 100% to make flex items full width on small screens */
+    flex-basis: 100%;
   }
 }
 
