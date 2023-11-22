@@ -83,7 +83,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch("/randomFilm");
+      const response = await fetch(`${process.env.API_URL}/randomFilm`);
       const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
