@@ -3,6 +3,7 @@ import "./RandomFilm.css";
 import { Menu } from "../Menu/Menu";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import Modal from "react-modal";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 interface Film {
   result: {
@@ -63,7 +64,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/tokens/validate");
+        const response = await fetch(`${baseUrl}/tokens/validate`);
         const responseData = await response.json();
 
         if (responseData.session === true) {
@@ -83,7 +84,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch("/randomFilm");
+      const response = await fetch(`${baseUrl}/randomFilm`);
       const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
@@ -103,7 +104,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/savedFilms/films", {
+      const response = await fetch(`${baseUrl}/savedFilms/films`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
