@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SavedFilms.css";
 import { Menu } from "../Menu/Menu";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 interface Film {
   result: {
@@ -33,7 +34,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch("/tokens/validate");
+        const response = await fetch(`${baseUrl}/tokens/validate`);
         const responseData = await response.json();
         if (!responseData.session) {
           navigate("/");
@@ -55,7 +56,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
 
   const fetchFilms = async () => {
     try {
-      const response = await fetch("/savedFilms/films");
+      const response = await fetch(`${baseUrl}/savedFilms/films`);
       const responseData = await response.json();
       setSaved(responseData);
       setIsFetched(true);
@@ -67,7 +68,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
 
   const deleteFilm = async (index: number) => {
     try {
-      await fetch("/savedFilms/film", {
+      await fetch(`${baseUrl}/savedFilms/film`, {
         method: "delete",
         headers: {
           "Content-Type": "application/json",

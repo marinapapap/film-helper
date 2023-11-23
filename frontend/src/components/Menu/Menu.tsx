@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 import "./Menu.css";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 interface MenuProps {
   navigate: Function;
@@ -21,7 +22,7 @@ export const Menu: React.FC<MenuProps> = ({
     event.preventDefault();
 
     try {
-      await fetch("/tokens/logout");
+      await fetch(`${baseUrl}/tokens/logout`);
 
       setInSession(false);
       navigate("/");

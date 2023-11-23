@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 interface SignupFormProps {
   navigate: Function;
@@ -13,7 +14,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch("/tokens/validate");
+        const response = await fetch(`${baseUrl}/tokens/validate`);
         const responseData = await response.json();
         if (responseData.session) {
           navigate("/");
@@ -36,7 +37,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/users", {
+      const response = await fetch(`${baseUrl}/users`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",

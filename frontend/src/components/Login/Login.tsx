@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
+const baseUrl = process.env.REACT_APP_API_URL;
 
 interface LoginFormProps {
   navigate: Function;
@@ -12,7 +13,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch("/tokens/validate");
+        const response = await fetch(`${baseUrl}/tokens/validate`);
         const responseData = await response.json();
         if (responseData.session) {
           navigate("/");
@@ -35,7 +36,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/tokens/login", {
+      const response = await fetch(`${baseUrl}/tokens/login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
