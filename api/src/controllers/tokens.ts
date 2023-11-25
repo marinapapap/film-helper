@@ -19,7 +19,7 @@ export const TokensController = {
       const token = await generateToken(user.id);
       return res
         .status(201)
-        .cookie("token", token, { httpOnly: true })
+        .cookie("token", token, { httpOnly: true, secure: true })
         .json({ message: "OK" });
     } else {
       return res.status(401).json({ message: "auth error" });
