@@ -47,19 +47,16 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
       }
     };
     validateToken();
-  }, []);
-
-  useEffect(() => {
     fetchFilms();
     noFilmsSavedNotice();
-  }, [saved.films]);
+    setIsFetched(true);
+  }, []);
 
   const fetchFilms = async () => {
     try {
       const response = await fetch(`${baseUrl}/savedFilms/films`);
       const responseData = await response.json();
       setSaved(responseData);
-      setIsFetched(true);
     } catch (error) {
       navigate("/");
       console.error(error);
@@ -77,6 +74,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
           filmIndex: index,
         }),
       });
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
