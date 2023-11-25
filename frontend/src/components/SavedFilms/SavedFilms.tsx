@@ -34,27 +34,31 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch(`${baseUrl}/tokens/validate`);
+        const response = await fetch(`${baseUrl}/tokens/validate`, {
+          credentials: "include",
+        });
         const responseData = await response.json();
         if (!responseData.session) {
-          navigate("/");
+          navigate("/login");
+        } else {
+          setInSession(true);
+          fetchFilms();
+          setIsFetched(true);
+          noFilmsSavedNotice();
         }
-
-        setInSession(true);
       } catch (error) {
         navigate("/");
         console.error(error);
       }
     };
     validateToken();
-    fetchFilms();
-    noFilmsSavedNotice();
-    setIsFetched(true);
   }, []);
 
   const fetchFilms = async () => {
     try {
-      const response = await fetch(`${baseUrl}/savedFilms/films`);
+      const response = await fetch(`${baseUrl}/savedFilms/films`, {
+        credentials: "include",
+      });
       const responseData = await response.json();
       setSaved(responseData);
     } catch (error) {
@@ -67,6 +71,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
     try {
       await fetch(`${baseUrl}/savedFilms/film`, {
         method: "delete",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

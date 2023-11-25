@@ -14,7 +14,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch(`${baseUrl}/tokens/validate`);
+        const response = await fetch(`${baseUrl}/tokens/validate`, {
+          credentials: "include",
+        });
         const responseData = await response.json();
         if (responseData.session) {
           navigate("/");
@@ -39,6 +41,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
     try {
       const response = await fetch(`${baseUrl}/users`, {
         method: "post",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
