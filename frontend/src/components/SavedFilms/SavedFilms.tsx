@@ -37,19 +37,19 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
         const response = await fetch(`${baseUrl}/tokens/validate`);
         const responseData = await response.json();
         if (!responseData.session) {
-          navigate("/");
+          navigate("/login");
+        } else {
+          setInSession(true);
+          fetchFilms();
+          setIsFetched(true);
+          noFilmsSavedNotice();
         }
-
-        setInSession(true);
       } catch (error) {
         navigate("/");
         console.error(error);
       }
     };
     validateToken();
-    fetchFilms();
-    noFilmsSavedNotice();
-    setIsFetched(true);
   }, []);
 
   const fetchFilms = async () => {
