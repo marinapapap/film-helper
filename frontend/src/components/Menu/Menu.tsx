@@ -22,7 +22,9 @@ export const Menu: React.FC<MenuProps> = ({
     event.preventDefault();
 
     try {
-      await fetch(`${baseUrl}/tokens/logout`);
+      await fetch(`${baseUrl}/tokens/logout`, {
+        credentials: "include",
+      });
 
       setInSession(false);
       navigate("/");

@@ -13,7 +13,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await fetch(`${baseUrl}/tokens/validate`);
+        const response = await fetch(`${baseUrl}/tokens/validate`, {
+          credentials: "include",
+        });
         const responseData = await response.json();
         if (responseData.session) {
           navigate("/");
@@ -38,6 +40,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
     try {
       const response = await fetch(`${baseUrl}/tokens/login`, {
         method: "post",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

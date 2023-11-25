@@ -64,7 +64,9 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${baseUrl}/tokens/validate`);
+        const response = await fetch(`${baseUrl}/tokens/validate`, {
+          credentials: "include",
+        });
         const responseData = await response.json();
 
         if (responseData.session === true) {
@@ -84,7 +86,9 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch(`${baseUrl}/randomFilm`);
+      const response = await fetch(`${baseUrl}/randomFilm`, {
+        credentials: "include",
+      });
       const data = (await response.json()) as any;
       setRandomFilm(data);
       setRenderFilm(true);
@@ -106,6 +110,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     try {
       const response = await fetch(`${baseUrl}/savedFilms/films`, {
         method: "post",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
