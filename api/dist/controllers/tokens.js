@@ -53,7 +53,11 @@ exports.TokensController = {
             const token = yield (0, tokenGenerator_1.generateToken)(user.id);
             return res
                 .status(201)
-                .cookie("token", token, { httpOnly: true, secure: true })
+                .cookie("token", token, {
+                httpOnly: true,
+                sameSite: "none",
+                secure: true,
+            })
                 .json({ message: "OK" });
         }
         else {
