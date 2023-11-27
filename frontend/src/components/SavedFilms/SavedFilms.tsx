@@ -25,6 +25,10 @@ interface SavedFilmsProps {
   navigate: Function;
 }
 
+interface CallbackFunction {
+  (): void;
+}
+
 export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
@@ -42,9 +46,9 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
           navigate("/login");
         } else {
           setInSession(true);
-          fetchFilms();
-          setIsFetched(true);
-          noFilmsSavedNotice();
+          fetchFilms(() => {
+            noFilmsSavedNotice();
+          });
         }
       } catch (error) {
         navigate("/");
@@ -54,13 +58,18 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
     validateToken();
   }, []);
 
-  const fetchFilms = async () => {
+  const fetchFilms = async (callback: CallbackFunction) => {
     try {
       const response = await fetch(`${baseUrl}/savedFilms/films`, {
         credentials: "include",
       });
       const responseData = await response.json();
       setSaved(responseData);
+      setIsFetched(true);
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     } catch (error) {
       navigate("/");
       console.error(error);
