@@ -55,8 +55,8 @@ exports.TokensController = {
                 .status(201)
                 .cookie("token", token, {
                 httpOnly: true,
-                sameSite: "lax",
-                domain: ".vercel.app",
+                sameSite: "strict",
+                secure: true,
             })
                 .json({ message: "OK" });
         }
@@ -66,8 +66,8 @@ exports.TokensController = {
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.clearCookie("token", {
-            sameSite: "lax",
-            domain: ".vercel.app",
+            sameSite: "strict",
+            secure: true,
         });
         res.send({ success: true });
     }),
