@@ -57,7 +57,6 @@ exports.TokensController = {
                 httpOnly: true,
                 sameSite: "lax",
                 domain: ".vercel.app",
-                secure: true,
             })
                 .json({ message: "OK" });
         }
@@ -69,7 +68,6 @@ exports.TokensController = {
         res.clearCookie("token", {
             sameSite: "lax",
             domain: ".vercel.app",
-            secure: true,
         });
         res.send({ success: true });
     }),
