@@ -21,8 +21,8 @@ export const TokensController = {
         .status(201)
         .cookie("token", token, {
           httpOnly: true,
-          sameSite: "none",
-          secure: true,
+          sameSite: "lax",
+          domain: "localhost",
         })
         .json({ message: "OK" });
     } else {
@@ -31,7 +31,10 @@ export const TokensController = {
   },
 
   Clear: async (req: Request, res: Response) => {
-    res.clearCookie("token", { secure: true, sameSite: "none" });
+    res.clearCookie("token", {
+      sameSite: "lax",
+      domain: "localhost",
+    });
     res.send({ success: true });
   },
 

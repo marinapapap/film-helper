@@ -54,10 +54,10 @@ exports.TokensController = {
             return res
                 .status(201)
                 .cookie("token", token, {
-                httpOnly: true,
-                sameSite: "none",
-                secure: true,
-            })
+                  httpOnly: true,
+                  sameSite: "lax",
+                  domain: "localhost",
+                })
                 .json({ message: "OK" });
         }
         else {
@@ -65,7 +65,10 @@ exports.TokensController = {
         }
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        res.clearCookie("token", { secure: true, sameSite: "none" });
+        res.clearCookie("token", {
+            sameSite: "lax",
+            domain: "localhost",
+        });
         res.send({ success: true });
     }),
     Check: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
