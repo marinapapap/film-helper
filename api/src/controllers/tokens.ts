@@ -22,7 +22,8 @@ export const TokensController = {
         .cookie("token", token, {
           httpOnly: true,
           sameSite: "lax",
-          domain: "localhost",
+          domain: ".vercel.app",
+          secure: true,
         })
         .json({ message: "OK" });
     } else {
@@ -33,7 +34,8 @@ export const TokensController = {
   Clear: async (req: Request, res: Response) => {
     res.clearCookie("token", {
       sameSite: "lax",
-      domain: "localhost",
+      domain: ".vercel.app",
+      secure: true,
     });
     res.send({ success: true });
   },

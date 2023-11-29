@@ -54,10 +54,11 @@ exports.TokensController = {
             return res
                 .status(201)
                 .cookie("token", token, {
-                  httpOnly: true,
-                  sameSite: "lax",
-                  domain: "localhost",
-                })
+                httpOnly: true,
+                sameSite: "lax",
+                domain: ".vercel.app",
+                secure: true,
+            })
                 .json({ message: "OK" });
         }
         else {
@@ -67,7 +68,8 @@ exports.TokensController = {
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.clearCookie("token", {
             sameSite: "lax",
-            domain: "localhost",
+            domain: ".vercel.app",
+            secure: true,
         });
         res.send({ success: true });
     }),
