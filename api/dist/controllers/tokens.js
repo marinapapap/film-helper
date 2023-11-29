@@ -54,10 +54,10 @@ exports.TokensController = {
             return res
                 .status(201)
                 .cookie("token", token, {
-                httpOnly: true,
-                sameSite: "lax",
-                domain: "localhost",
-            })
+                  httpOnly: true,
+                  sameSite: "lax",
+                  domain: "localhost",
+                })
                 .json({ message: "OK" });
         }
         else {
