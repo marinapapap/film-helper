@@ -55,7 +55,7 @@ exports.TokensController = {
                 .status(201)
                 .cookie("token", token, {
                 httpOnly: true,
-                sameSite: "strict",
+                sameSite: "none",
                 secure: true,
             })
                 .json({ message: "OK" });
@@ -66,7 +66,7 @@ exports.TokensController = {
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.clearCookie("token", {
-            sameSite: "strict",
+            sameSite: "none",
             secure: true,
         });
         res.send({ success: true });
