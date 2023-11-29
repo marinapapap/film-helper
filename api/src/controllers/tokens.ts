@@ -31,7 +31,7 @@ export const TokensController = {
   },
 
   Clear: async (req: Request, res: Response) => {
-    res.clearCookie("token");
+    res.clearCookie("token", { secure: true, sameSite: "none" });
     res.send({ success: true });
   },
 

@@ -65,7 +65,7 @@ exports.TokensController = {
         }
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        res.clearCookie("token");
+        res.clearCookie("token", { secure: true, sameSite: "none" });
         res.send({ success: true });
     }),
     Check: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
