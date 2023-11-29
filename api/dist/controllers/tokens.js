@@ -53,7 +53,11 @@ exports.TokensController = {
             const token = yield (0, tokenGenerator_1.generateToken)(user.id);
             return res
                 .status(201)
-                .cookie("token", token, { httpOnly: true })
+                .cookie("token", token, {
+                httpOnly: true,
+                sameSite: "lax",
+                domain: "localhost",
+            })
                 .json({ message: "OK" });
         }
         else {
@@ -61,7 +65,10 @@ exports.TokensController = {
         }
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        res.clearCookie("token");
+        res.clearCookie("token", {
+            sameSite: "lax",
+            domain: "localhost",
+        });
         res.send({ success: true });
     }),
     Check: (req, res) => __awaiter(void 0, void 0, void 0, function* () {

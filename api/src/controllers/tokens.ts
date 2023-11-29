@@ -19,7 +19,11 @@ export const TokensController = {
       const token = await generateToken(user.id);
       return res
         .status(201)
-        .cookie("token", token, { httpOnly: true })
+        .cookie("token", token, {
+          httpOnly: true,
+          sameSite: "lax",
+          domain: "localhost",
+        })
         .json({ message: "OK" });
     } else {
       return res.status(401).json({ message: "auth error" });
@@ -27,7 +31,10 @@ export const TokensController = {
   },
 
   Clear: async (req: Request, res: Response) => {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      sameSite: "lax",
+      domain: "localhost",
+    });
     res.send({ success: true });
   },
 
