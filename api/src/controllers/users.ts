@@ -7,10 +7,11 @@ export const UsersController = {
     try {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      const lowercaseEmail = req.body.email.toLowerCase();
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
-        email: req.body.email,
+        email: lowercaseEmail,
       });
       await user.save();
       return res.status(201).json({ message: "OK" });
