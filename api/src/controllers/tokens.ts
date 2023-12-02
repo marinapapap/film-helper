@@ -21,7 +21,7 @@ export const TokensController = {
         .status(201)
         .cookie("token", token, {
           httpOnly: true,
-          sameSite: "lax",
+          sameSite: "none",
           secure: true,
           domain: "film-roulette-one.vercel.app",
         })
@@ -34,7 +34,7 @@ export const TokensController = {
   Clear: async (req: Request, res: Response) => {
     res.clearCookie("token", {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
       secure: true,
       domain: "film-roulette-one.vercel.app",
     });
