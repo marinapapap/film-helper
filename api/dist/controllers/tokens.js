@@ -42,9 +42,9 @@ const user_1 = require("../models/user");
 const bcrypt = __importStar(require("bcrypt"));
 exports.TokensController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const email = req.body.email;
+        const lowercaseEmail = req.body.email.toLowerCase();
         const password = req.body.password;
-        const user = yield user_1.User.findOne({ email: email });
+        const user = yield user_1.User.findOne({ email: lowercaseEmail });
         if (!user) {
             return res.status(401).json({ message: "auth error" });
         }

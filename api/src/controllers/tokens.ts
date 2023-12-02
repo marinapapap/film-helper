@@ -6,10 +6,10 @@ import * as bcrypt from "bcrypt";
 
 export const TokensController = {
   Create: async (req: Request, res: Response) => {
-    const email: string = req.body.email;
+    const lowercaseEmail: string = req.body.email.toLowerCase();
     const password: string = req.body.password;
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email: lowercaseEmail });
     if (!user) {
       return res.status(401).json({ message: "auth error" });
     }
