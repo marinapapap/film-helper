@@ -55,8 +55,9 @@ exports.TokensController = {
                 .status(201)
                 .cookie("token", token, {
                 httpOnly: true,
-                sameSite: "none",
+                sameSite: "lax",
                 secure: true,
+                domain: "film-roulette-one.vercel.app",
             })
                 .json({ message: "OK" });
         }
@@ -66,8 +67,10 @@ exports.TokensController = {
     }),
     Clear: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.clearCookie("token", {
-            sameSite: "none",
+            httpOnly: true,
+            sameSite: "lax",
             secure: true,
+            domain: "film-roulette-one.vercel.app",
         });
         res.send({ success: true });
     }),
