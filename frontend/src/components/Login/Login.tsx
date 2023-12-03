@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css";
+import "./Login.css";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 interface LoginFormProps {
@@ -61,7 +61,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
 
   const renderErrorMessage = () => {
     if (renderError) {
-      return <div>Invalid user details</div>;
+      return <div className="error-message">Invalid user details</div>;
     }
     return null;
   };
