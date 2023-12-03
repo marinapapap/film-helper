@@ -9,6 +9,7 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [renderError, setRenderError] = useState<boolean>(false);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -31,6 +32,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
   const handleChange = (setFunction: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       setFunction(event.target.value);
+      setRenderError(false);
     };
   };
 
@@ -48,12 +50,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
       });
 
       if (response.status !== 201) {
+        setRenderError(true);
       } else {
         navigate("/");
       }
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const renderErrorMessage = () => {
+    if (renderError) {
+      return <div>Invalid user details</div>;
+    }
+    return null;
   };
 
   return (
@@ -85,6 +95,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
             onChange={handleChange(setPassword)}
           />
         </div>
+        {renderErrorMessage()}
         <div>
           <input
             id="login-submit"
