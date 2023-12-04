@@ -28,6 +28,7 @@ const UserSchema = new mongoose_1.default.Schema({
     password: {
         type: String,
         required: true,
+        select: false,
     },
     films: [FilmSchema],
 });

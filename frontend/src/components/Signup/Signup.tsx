@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css";
+import "./Signup.css";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 interface SignupFormProps {
@@ -10,6 +10,8 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [renderError, setRenderError] = useState<boolean>(false);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -22,7 +24,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
           navigate("/");
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
 
@@ -32,6 +34,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   const handleChange = (setFunction: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       setFunction(event.target.value);
+      setRenderError(false);
     };
   };
 
@@ -53,12 +56,27 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
       });
 
       if (response.status !== 201) {
+        setRenderError(true);
       } else {
         navigate("/login");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
     }
+  };
+
+  const passwordMatchMessage = () => {
+    if (password !== confirmPassword) {
+      return <div className="error-message">The passwords do not match</div>;
+    }
+    return null;
+  };
+
+  const renderErrorMessage = () => {
+    if (renderError) {
+      return <div className="error-message">Invalid user details</div>;
+    }
+    return null;
   };
 
   return (
@@ -103,6 +121,21 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
             onChange={handleChange(setPassword)}
           />
         </div>
+        <div id="confirm-password-container">
+          <label htmlFor="signup-password">Confirm your password:</label>
+          <br />
+          <input
+            id="confirm-signup-password"
+            name="signup-password"
+            data-cy="signup-password"
+            type="password"
+            required
+            value={confirmPassword}
+            onChange={handleChange(setConfirmPassword)}
+          />
+        </div>
+        {passwordMatchMessage()}
+        {renderErrorMessage()}
         <div>
           <input
             id="signup-submit"

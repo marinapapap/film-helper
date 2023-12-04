@@ -38,6 +38,12 @@ const bcrypt = __importStar(require("bcrypt"));
 exports.UsersController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            const regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+            if (!regex.test(req.body.password)) {
+                return res.send({
+                    message: "Password must be at least 6 characters long and include at least one uppercase letter and one digit",
+                });
+            }
             const salt = yield bcrypt.genSalt(10);
             const hashedPassword = yield bcrypt.hash(req.body.password, salt);
             const lowercaseEmail = req.body.email.toLowerCase();
