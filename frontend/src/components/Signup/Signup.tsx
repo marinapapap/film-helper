@@ -11,6 +11,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [renderError, setRenderError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -56,12 +57,24 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
       });
 
       if (response.status !== 201) {
+        const data = await response.json();
         setRenderError(true);
+        handleErrorMessage(data.message);
       } else {
         navigate("/login");
       }
     } catch (error: any) {
       console.error(error);
+    }
+  };
+
+  const handleErrorMessage = (message: any) => {
+    switch (typeof message) {
+      case "string":
+        setErrorMessage(message);
+        break;
+      default:
+        setErrorMessage("Invalid user details");
     }
   };
 
@@ -74,7 +87,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
 
   const renderErrorMessage = () => {
     if (renderError) {
-      return <div className="error-message">Invalid user details</div>;
+      return <div className="error-message">{errorMessage}</div>;
     }
     return null;
   };

@@ -40,7 +40,7 @@ exports.UsersController = {
         try {
             const regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
             if (!regex.test(req.body.password)) {
-                return res.send({
+                return res.status(400).json({
                     message: "Password must be at least 6 characters long and include at least one uppercase letter and one digit",
                 });
             }
@@ -56,7 +56,20 @@ exports.UsersController = {
             return res.status(201).json({ message: "OK" });
         }
         catch (error) {
-            return res.status(400).json({ message: error });
+            if (error.code == 11000) {
+                return res
+                    .status(400)
+                    .json({ message: "That email address is already registered" });
+            }
+            else {
+                const errors = error.errors;
+                for (const key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        return res.status(400).json({ message: errors[key].message });
+                    }
+                }
+                return res.status(400).json({ message: error });
+            }
         }
     }),
 };
