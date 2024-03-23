@@ -30,7 +30,7 @@ export const RandomFilmController = {
 
 const fetchTop250Films = async () => {
   const response = await fetch(
-    `https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`
+    `https://tv-api.com/en/API/Top250Movies/${process.env.TOP_250}`
   );
   return response.json();
 };

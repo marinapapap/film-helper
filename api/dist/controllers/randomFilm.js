@@ -35,7 +35,7 @@ exports.RandomFilmController = {
     }),
 };
 const fetchTop250Films = () => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield fetch(`https://imdb-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
+    const response = yield fetch(`https://tv-api.com/en/API/Top250Movies/${process.env.TOP_250}`);
     return response.json();
 });
 const getRandomFilm = (films) => {
