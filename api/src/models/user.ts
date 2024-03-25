@@ -43,6 +43,7 @@ const UserSchema: Schema<IUser> = new mongoose.Schema<IUser>({
   password: {
     type: String,
     required: true,
+    select: false,
   } as any,
   films: [FilmSchema],
 });
