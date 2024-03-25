@@ -44,7 +44,7 @@ exports.TokensController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const lowercaseEmail = req.body.email.toLowerCase();
         const password = req.body.password;
-        const user = yield user_1.User.findOne({ email: lowercaseEmail });
+        const user = yield user_1.User.findOne({ email: lowercaseEmail }).select("+password");
         if (!user) {
             return res.status(401).json({ message: "auth error" });
         }

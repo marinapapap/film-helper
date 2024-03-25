@@ -9,7 +9,9 @@ export const TokensController = {
     const lowercaseEmail: string = req.body.email.toLowerCase();
     const password: string = req.body.password;
 
-    const user = await User.findOne({ email: lowercaseEmail });
+    const user = await User.findOne({ email: lowercaseEmail }).select(
+      "+password"
+    );
     if (!user) {
       return res.status(401).json({ message: "auth error" });
     }
