@@ -5,7 +5,9 @@ import { SignupForm } from "./components/Signup/Signup";
 import { SavedFilms } from "./components/SavedFilms/SavedFilms";
 import "./App.css";
 
-const App = () => {
+interface AppProps {}
+
+const App: React.FC<AppProps> = () => {
   return (
     <Routes>
       <Route path="/" element={<RandomFilm navigate={useNavigate()} />} />
