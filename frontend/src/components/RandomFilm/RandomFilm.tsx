@@ -96,6 +96,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       setRenderFilm(true);
 
       setSaved(data.saved);
+      console.log("HERE");
       console.log(data);
 
       setTimeout(() => {
