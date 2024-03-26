@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SavedFilms.css";
 import { Menu } from "../Menu/Menu";
+import { NoFilmsSavedNotice } from "./Notice/Notice";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 interface Film {
@@ -25,10 +26,6 @@ interface SavedFilmsProps {
   navigate: Function;
 }
 
-interface CallbackFunction {
-  (): void;
-}
-
 export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<Saved>({ films: [] });
@@ -46,9 +43,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
           navigate("/login");
         } else {
           setInSession(true);
-          fetchFilms(() => {
-            noFilmsSavedNotice();
-          });
+          fetchFilms();
         }
       } catch (error) {
         navigate("/");
@@ -58,7 +53,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
     validateToken();
   }, []);
 
-  const fetchFilms = async (callback: CallbackFunction) => {
+  const fetchFilms = async () => {
     try {
       const response = await fetch(`${baseUrl}/savedFilms/films`, {
         credentials: "include",
@@ -66,10 +61,6 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
       const responseData = await response.json();
       setSaved(responseData);
       setIsFetched(true);
-
-      if (callback && typeof callback === "function") {
-        callback();
-      }
     } catch (error) {
       navigate("/");
       console.error(error);
@@ -123,22 +114,6 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
     });
   };
 
-  const noFilmsSavedNotice = () => {
-    if (isFetched && !saved.films.length) {
-      return (
-        <div className="saved-msg">
-          <p>Save films to curate your personal watch list here.</p>
-          <p>
-            You only have 10 slots to fill before it's time to actually start
-            watching them!
-          </p>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
-
   return (
     <>
       <div className="content">
@@ -152,7 +127,10 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
           <div className="film-grid">{renderFilms()}</div>
         </div>
       </div>
-      {noFilmsSavedNotice()}
+      <NoFilmsSavedNotice
+        isFetched={isFetched}
+        savedFilmsCount={saved.films.length}
+      />
     </>
   );
 };

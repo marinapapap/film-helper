@@ -1,7 +1,6 @@
 import { LoginForm } from "./Login";
 
 const navigate = () => {};
-const setGlobalSession = () => {};
 
 describe("Login", () => {
   beforeEach(() => {

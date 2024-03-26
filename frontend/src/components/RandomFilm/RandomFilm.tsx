@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./RandomFilm.css";
 import { Menu } from "../Menu/Menu";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
+import { ShowRandomFilm } from "./ShowRandomFilm/ShowRandomFilm";
+import { SaveButton } from "./SaveButton/SaveButton";
 import Modal from "react-modal";
 const baseUrl = process.env.REACT_APP_API_URL;
 
@@ -135,59 +137,12 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
     }
   };
 
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  const showRandomFilm = (): JSX.Element => {
-    return (
-      <>
-        <h1 className="example" data-cy="fulltitle">
-          {randomFilm.result.title}
-        </h1>
-        <p data-cy="crew">{randomFilm.result.crew}</p>
-        <div>
-          <img
-            src={randomFilm.result.image}
-            alt=""
-            data-cy="image"
-            width="300"
-            height="400"
-          ></img>
-        </div>
-        <div></div>
-      </>
-    );
   };
 
-  const renderSaveButton = () => {
-    return (
-      <>
-        {saved === false ? (
-          <button
-            className="button-rf"
-            type="submit"
-            onClick={handleSave}
-            data-cy="button"
-          >
-            Save For Later
-          </button>
-        ) : (
-          <button
-            className="button-rf saved"
-            type="button"
-            data-cy="button-disabled"
-            disabled
-          >
-            Saved
-          </button>
-        )}
-      </>
-    );
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -225,7 +180,9 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       <LoadingSpinner isLoading={isLoading} />
 
       <div className="film-roulette">
-        <div>{renderFilm === true ? showRandomFilm() : false}</div>
+        <div>
+          <ShowRandomFilm randomFilm={randomFilm} renderFilm={renderFilm} />
+        </div>
         <div>
           <button
             className="button-rf"
@@ -237,7 +194,12 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
           </button>
 
           <span style={{ margin: "20px" }}></span>
-          {renderFilm && inSession ? renderSaveButton() : false}
+          <SaveButton
+            handleSave={handleSave}
+            saved={saved}
+            renderFilm={renderFilm}
+            inSession={inSession}
+          />
         </div>
       </div>
     </div>
