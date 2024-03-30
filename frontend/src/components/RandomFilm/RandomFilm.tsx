@@ -65,7 +65,6 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(baseUrl);
       try {
         const response = await fetch(`${baseUrl}/tokens/validate`, {
           credentials: "include",
