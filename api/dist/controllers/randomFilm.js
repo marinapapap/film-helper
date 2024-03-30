@@ -26,10 +26,7 @@ exports.RandomFilmController = {
                 return res.status(404).json({ message: "User not found" });
             }
             const saved = searchForSavedFilm(user.films, randomFilm.id);
-            return res
-                .status(200)
-                .header("Cache-Control", "no-cache")
-                .json({ result: randomFilm, saved });
+            return res.status(200).json({ result: randomFilm, saved });
         }
         catch (error) {
             console.log(error);

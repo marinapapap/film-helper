@@ -20,10 +20,7 @@ export const RandomFilmController = {
 
       const saved = searchForSavedFilm(user.films, randomFilm.id);
 
-      return res
-        .status(200)
-        .header("Cache-Control", "no-cache")
-        .json({ result: randomFilm, saved });
+      return res.status(200).json({ result: randomFilm, saved });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "Failed to fetch random film" });
