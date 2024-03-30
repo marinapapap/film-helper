@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./SavedFilms.css";
 import { Menu } from "../Menu/Menu";
 import { NoFilmsSavedNotice } from "./Notice/Notice";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 interface Film {
-  result: {
-    id: string;
-    rank: string;
-    title: string;
-    fullTitle: string;
-    year: string;
-    image: string;
-    crew: string;
-    imDbRating: string;
-    imDbRatingCount: string;
-  };
+  id: string;
+  rank: string;
+  title: string;
+  fullTitle: string;
+  year: string;
+  image: string;
+  crew: string;
+  imDbRating: string;
+  imDbRatingCount: string;
 }
 
 interface Saved {
@@ -31,6 +29,20 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   const [saved, setSaved] = useState<Saved>({ films: [] });
   const [isHomepage] = useState<boolean>(false);
   const [isFetched, setIsFetched] = useState<boolean>(false);
+
+  const fetchFilms = useCallback(async () => {
+    try {
+      const response = await fetch(`${baseUrl}/savedFilms/films`, {
+        credentials: "include",
+      });
+      const responseData = await response.json();
+      setSaved(responseData);
+      setIsFetched(true);
+    } catch (error) {
+      navigate("/");
+      console.error(error);
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const validateToken = async () => {
@@ -51,21 +63,7 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
       }
     };
     validateToken();
-  }, []);
-
-  const fetchFilms = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/savedFilms/films`, {
-        credentials: "include",
-      });
-      const responseData = await response.json();
-      setSaved(responseData);
-      setIsFetched(true);
-    } catch (error) {
-      navigate("/");
-      console.error(error);
-    }
-  };
+  }, [fetchFilms, navigate]);
 
   const deleteFilm = async (index: number) => {
     try {
@@ -86,13 +84,11 @@ export const SavedFilms: React.FC<SavedFilmsProps> = ({ navigate }) => {
   };
 
   const renderFilms = (): JSX.Element[] => {
-    return saved.films.map((film: any, index: number) => {
+    return saved.films.map((film: Film, index: number) => {
       return (
-        <div>
+        <div key={film.id}>
           <div className="film">
-            <div className="film-title" key={`fullTitle${index + 1}`}>
-              {film.fullTitle}
-            </div>
+            <div className="film-title">{film.fullTitle}</div>
             <p>ImDb rating: {film.imDbRating}/10</p>
             <img
               src={film.image}

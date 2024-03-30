@@ -43,20 +43,8 @@ const customStyles = {
 };
 
 export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
-  const [randomFilm, setRandomFilm] = useState<Film>({
-    result: {
-      id: "",
-      rank: "",
-      title: "",
-      fullTitle: "",
-      year: "",
-      image: "",
-      crew: "",
-      imDbRating: "",
-      imDbRatingCount: "",
-    },
-  });
-  const [renderFilm, setRenderFilm] = useState<boolean>(false);
+  const [randomFilm, setRandomFilm] = useState<Film>();
+  // const [renderFilm, setRenderFilm] = useState<boolean>(false);
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
   const [isHomepage] = useState<boolean>(true);
@@ -88,20 +76,19 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
     try {
       setIsLoading(true);
+      setRandomFilm(undefined);
       const response = await fetch(`${baseUrl}/randomFilm`, {
         credentials: "include",
       });
       const data = (await response.json()) as any;
       setRandomFilm(data);
-      setRenderFilm(true);
+      // setRenderFilm(true);
 
       setSaved(data.saved);
-      console.log("HERE");
-      console.log(data);
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error(error);
     }
@@ -119,7 +106,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
         },
         body: JSON.stringify({
           film: {
-            ...randomFilm.result,
+            ...randomFilm?.result,
           },
         }),
       });
@@ -182,7 +169,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
 
       <div className="film-roulette">
         <div>
-          <ShowRandomFilm randomFilm={randomFilm} renderFilm={renderFilm} />
+          <ShowRandomFilm randomFilm={randomFilm} />
         </div>
         <div>
           <button
@@ -198,7 +185,7 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
           <SaveButton
             handleSave={handleSave}
             saved={saved}
-            renderFilm={renderFilm}
+            renderFilm={!!randomFilm}
             inSession={inSession}
           />
         </div>

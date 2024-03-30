@@ -16,24 +16,22 @@ interface Film {
 }
 
 interface ShowRandomFilmProps {
-  randomFilm: Film;
-  renderFilm: boolean;
+  randomFilm?: Film;
 }
 
 export const ShowRandomFilm: React.FC<ShowRandomFilmProps> = ({
   randomFilm,
-  renderFilm,
 }) => {
-  if (renderFilm) {
+  if (randomFilm) {
     return (
       <>
         <h1 className="example" data-cy="fulltitle">
-          {randomFilm.result.title}
+          {randomFilm?.result.title}
         </h1>
-        <p data-cy="crew">{randomFilm.result.crew}</p>
+        <p data-cy="crew">{randomFilm?.result.crew}</p>
         <div>
           <img
-            src={randomFilm.result.image}
+            src={randomFilm?.result.image}
             alt=""
             data-cy="image"
             width="300"

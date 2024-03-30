@@ -27,7 +27,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
     };
 
     validateToken();
-  }, []);
+  }, [navigate]);
 
   const handleChange = (setFunction: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {

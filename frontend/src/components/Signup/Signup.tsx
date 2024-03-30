@@ -30,7 +30,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
     };
 
     validateToken();
-  }, []);
+  }, [navigate]);
 
   const handleChange = (setFunction: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
