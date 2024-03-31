@@ -9,6 +9,8 @@ export const TokensController = {
     const lowercaseEmail: string = req.body.email.toLowerCase();
     const password: string = req.body.password;
 
+    console.log(password);
+
     const user = await User.findOne({ email: lowercaseEmail }).select(
       "+password"
     );
@@ -26,7 +28,7 @@ export const TokensController = {
           sameSite: "none",
           secure: true,
         })
-        .header({ "Access-Control-Allow-Origin": "*" })
+        .header({ "Access-Control-Allow-Origin": process.env.FRONT_END_URL })
         .json({ message: "OK" });
     } else {
       return res.status(401).json({ message: "auth error" });

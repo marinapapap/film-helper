@@ -44,6 +44,7 @@ exports.TokensController = {
     Create: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const lowercaseEmail = req.body.email.toLowerCase();
         const password = req.body.password;
+        console.log(password);
         const user = yield user_1.User.findOne({ email: lowercaseEmail }).select("+password");
         if (!user) {
             return res.status(401).json({ message: "auth error" });
@@ -58,7 +59,7 @@ exports.TokensController = {
                 sameSite: "none",
                 secure: true,
             })
-                .header({ "Access-Control-Allow-Origin": "*" })
+                .header({ "Access-Control-Allow-Origin": process.env.FRONT_END_URL })
                 .json({ message: "OK" });
         }
         else {
