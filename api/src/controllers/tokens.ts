@@ -26,6 +26,7 @@ export const TokensController = {
           sameSite: "none",
           secure: true,
         })
+        .header({ "Access-Control-Allow-Origin": "*" })
         .json({ message: "OK" });
     } else {
       return res.status(401).json({ message: "auth error" });

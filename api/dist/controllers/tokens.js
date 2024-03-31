@@ -58,6 +58,7 @@ exports.TokensController = {
                 sameSite: "none",
                 secure: true,
             })
+                .header({ "Access-Control-Allow-Origin": "*" })
                 .json({ message: "OK" });
         }
         else {
