@@ -9,8 +9,6 @@ export const TokensController = {
     const lowercaseEmail: string = req.body.email.toLowerCase();
     const password: string = req.body.password;
 
-    console.log(password);
-
     const user = await User.findOne({ email: lowercaseEmail }).select(
       "+password"
     );

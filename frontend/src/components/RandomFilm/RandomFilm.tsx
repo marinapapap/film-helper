@@ -44,7 +44,6 @@ const customStyles = {
 
 export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
   const [randomFilm, setRandomFilm] = useState<Film>();
-  // const [renderFilm, setRenderFilm] = useState<boolean>(false);
   const [inSession, setInSession] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
   const [isHomepage] = useState<boolean>(true);
@@ -82,7 +81,6 @@ export const RandomFilm: React.FC<RandomFilmProps> = ({ navigate }) => {
       });
       const data = (await response.json()) as any;
       setRandomFilm(data);
-      // setRenderFilm(true);
 
       setSaved(data.saved);
 
