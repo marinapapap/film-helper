@@ -61,13 +61,15 @@ exports.UsersController = {
                     .status(400)
                     .json({ message: "That email address is already registered" });
             }
-            else {
+            else if (!!error.errors) {
                 const errors = error.errors;
                 for (const key in errors) {
                     if (errors.hasOwnProperty(key)) {
                         return res.status(400).json({ message: errors[key].message });
                     }
                 }
+            }
+            else {
                 return res.status(400).json({ message: error });
             }
         }
