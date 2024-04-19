@@ -87,3 +87,33 @@ $ npm run start
 ```
 
 Open http://localhost:3000 to view and use the Film Roulette app in your browser.
+
+# Technologies
+
+Here's an overview of the technologies used to build the application.
+
+- **M** - MongoDB
+- **E** - Express
+- **R** - React
+- **N** - Node
+
+Also used is...
+
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) for styling.
+- [Mongoose](https://mongoosejs.com) to model objects in MongoDB.
+- [Prettier](https://prettier.io) for code formatting.
+- [Nodemon](https://nodemon.io/) to reload the server automatically.
+- [PostMan](https://www.postman.com) for testing http requests.
+
+## Architecture
+
+The application is comprised of two distinct pieces.
+
+- A backend API built with Express
+- A front end built with React
+
+The React front end sends HTTP requests to the backend API.
+
+### Api
+
+[IMDb-API](https://imdb-api.com/) provides a number of endpoints that serve different purposes when sorting through the entire IMDb catalogue of film data. I use the endpoint that returns the current top 250 rated films.
