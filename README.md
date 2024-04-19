@@ -32,11 +32,9 @@ $ cd api
 $ npm install
 ```
 
-Register and get API keys for the following:
+Register and get an API key for the [IMDb-API](https://imdb-api.com/)
 
-1. [IMDb-API](https://imdb-api.com/)
-
-2. [MongoDB](https://www.mongodb.com/)
+Register and get a database URI for [MongoDB](https://www.mongodb.com/)
 
 Create a new .env file in the api folder:
 
@@ -69,3 +67,23 @@ Copy the below code into the .env file and update:
 
 REACT_APP_API_URL = "http://localhost:8080"
 ```
+
+## Using the App
+
+From the main project directory...
+
+Start running the front-end server:
+
+```js
+$ cd frontend
+$ npm run start
+```
+
+Open a new terminal and start running the back-end server:
+
+```js
+$ cd api
+$ npm run start
+```
+
+Open http://localhost:3000 to view and use the Film Roulette app in your browser.
