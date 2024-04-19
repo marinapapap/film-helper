@@ -2,11 +2,11 @@
 
 ## The App
 
-An hour into scrolling through streaming services to find the perfect film, I wished someone would come along and make the decision for me. Then I thought, an app could be that person.
+One hour deep into the endless scroll through streaming services, I found myself wishing for someone to make the decision for me. That's when inspiration struck: an app can be that person!
 
-Film Roulette takes away the burden of making the "right" choice as it taps into the mystical powers of the universe (the top 250 films on imDb) to bring the best companion film to the user (it's picked at random).
+Introducing Film Roulette - an app designed to liberate users from the burden of choosing the "perfect" film. Harnessing the mystical powers of the universe (the top 250 films on IMDb), Film Roulette randomly selects the ideal cinematic companion for each user.
 
-If the user wishes to sign up to the Film Roulette community, they can then save up to 10 of these films to curate a personal "must watch" list.
+For those eager to join the Film Roulette community, the app offers the ability to save up to 10 of these chosen films, forming a curated "must-watch" list personalised to each user's taste.
 
 ## Project Goal
 
