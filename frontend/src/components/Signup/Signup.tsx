@@ -87,80 +87,88 @@ export const SignupForm: React.FC<SignupFormProps> = ({ navigate }) => {
 
   const renderErrorMessage = () => {
     if (renderError) {
-      return <div className="error-message">{errorMessage}</div>;
+      return (
+        <>
+          <div className="error-message">{errorMessage}</div>
+        </>
+      );
     }
     return null;
   };
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <div id="signup-username-container">
-          <label htmlFor="signup-username">Username:</label>
-          <br />
-          <input
-            id="signup-username"
-            name="signup-username"
-            data-cy="signup-username"
-            type="text"
-            required
-            value={username}
-            onChange={handleChange(setUsername)}
-          />
+      <div className="signup-container">
+        <form onSubmit={handleSubmit}>
+          <div id="signup-username-container">
+            <input
+              id="signup-username"
+              className="signup-input"
+              name="signup-username"
+              data-cy="signup-username"
+              type="text"
+              placeholder="Username"
+              required
+              value={username}
+              onChange={handleChange(setUsername)}
+            />
+          </div>
+          <div id="signup-email-container">
+            <input
+              id="signup-email"
+              className="signup-input"
+              name="signup-email"
+              data-cy="signup-email"
+              type="text"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={handleChange(setEmail)}
+            />
+          </div>
+          <div id="signup-password-container">
+            <input
+              id="signup-password"
+              className="signup-input"
+              name="signup-password"
+              data-cy="signup-password"
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={handleChange(setPassword)}
+            />
+          </div>
+          <div id="confirm-password-container">
+            <input
+              id="confirm-signup-password"
+              className="signup-input"
+              name="signup-password"
+              data-cy="signup-password"
+              type="password"
+              placeholder="Confirm Password"
+              required
+              value={confirmPassword}
+              onChange={handleChange(setConfirmPassword)}
+            />
+          </div>
+          {passwordMatchMessage()}
+          {renderErrorMessage()}
+          <div>
+            <input
+              id="signup-submit"
+              data-cy="signup-submit"
+              type="submit"
+              value="submit"
+            />
+          </div>
+        </form>
+        <div id="login-link">
+          <p>
+            Already have an account? <br /> Login <a href="/login">here</a>
+          </p>
         </div>
-        <div id="signup-email-container">
-          <label htmlFor="signup-email">Email:</label>
-          <br />
-          <input
-            id="signup-email"
-            name="signup-email"
-            data-cy="signup-email"
-            type="text"
-            required
-            value={email}
-            onChange={handleChange(setEmail)}
-          />
-        </div>
-        <div id="signup-password-container">
-          <label htmlFor="signup-password">Password:</label>
-          <br />
-          <input
-            id="signup-password"
-            name="signup-password"
-            data-cy="signup-password"
-            type="password"
-            required
-            value={password}
-            onChange={handleChange(setPassword)}
-          />
-        </div>
-        <div id="confirm-password-container">
-          <label htmlFor="signup-password">Confirm your password:</label>
-          <br />
-          <input
-            id="confirm-signup-password"
-            name="signup-password"
-            data-cy="signup-password"
-            type="password"
-            required
-            value={confirmPassword}
-            onChange={handleChange(setConfirmPassword)}
-          />
-        </div>
-        {passwordMatchMessage()}
-        {renderErrorMessage()}
-        <div>
-          <input
-            id="signup-submit"
-            data-cy="signup-submit"
-            type="submit"
-            value="submit"
-          />
-        </div>
-      </form>
-      <p>
-        Already have an account? Login <a href="/login">here</a>
-      </p>
+      </div>
     </div>
   );
 };

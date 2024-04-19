@@ -1,3 +1,42 @@
 .error-message {
-  color: red;
+  color: #ff0000; /* Red color */
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.login-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#login-submit {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #535353;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#signup-link {
+  padding-top: 10px;
 }

@@ -68,46 +68,51 @@ export const LoginForm: React.FC<LoginFormProps> = ({ navigate }) => {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <div id="login-email-container">
-          <label htmlFor="login-email">Email:</label>
-          <br />
-          <input
-            id="login-email"
-            name="login-email"
-            data-cy="login-email"
-            type="text"
-            required
-            value={email}
-            onChange={handleChange(setEmail)}
-          />
+      <div className="login-container">
+        <form onSubmit={handleSubmit}>
+          <div id="login-email-container">
+            <input
+              id="login-email"
+              className="login-input"
+              name="login-email"
+              data-cy="login-email"
+              type="text"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={handleChange(setEmail)}
+            />
+          </div>
+          <div id="login-password-container">
+            <br />
+            <input
+              id="login-password"
+              className="login-input"
+              name="login-password"
+              data-cy="login-password"
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={handleChange(setPassword)}
+            />
+          </div>
+          {renderErrorMessage()}
+          <div>
+            <input
+              id="login-submit"
+              data-cy="login-submit"
+              type="submit"
+              value="submit"
+            />
+          </div>
+        </form>
+        <div id="signup-link">
+          <p>
+            Need an account? Signup <a href="/signup">here</a>
+          </p>
         </div>
-        <div id="login-password-container">
-          <label htmlFor="login-password">Password:</label>
-          <br />
-          <input
-            id="login-password"
-            name="login-password"
-            data-cy="login-password"
-            type="password"
-            required
-            value={password}
-            onChange={handleChange(setPassword)}
-          />
-        </div>
-        {renderErrorMessage()}
-        <div>
-          <input
-            id="login-submit"
-            data-cy="login-submit"
-            type="submit"
-            value="submit"
-          />
-        </div>
-      </form>
-      <p>
-        Need an account? Signup <a href="/signup">here</a>
-      </p>
+      </div>
     </div>
   );
 };
